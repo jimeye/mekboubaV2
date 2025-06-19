@@ -16,7 +16,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto pl-2 md:pl-2 pr-4 py-4 flex justify-center md:justify-start">
+      <div className="container mx-auto pl-2 landscape:pl-0 landscape:-ml-4 md:pl-6 pr-4 py-4 flex justify-start">
         <div className={hideLogo ? 'transition-opacity duration-300 opacity-0' : 'transition-opacity duration-300 opacity-100'}>
           <Logo />
         </div>
