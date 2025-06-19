@@ -27,7 +27,7 @@ const slides = [
     id: 4,
     image: '/images/slider4-small.jpg',
     title: 'Mekbouba',
-    description: 'POIVRONS, PIMENTS, TOMATES & ZEIT'
+    description: 'Poivrons, Piments, Tomates & Zeit'
   }
 ];
 
@@ -99,7 +99,8 @@ export default function HeroSlider() {
                 >
                   Notre Menu
                 </a>
-                <p className="text-xl md:text-2xl text-white/80 mt-2 text-[1.2em]">*Uniquement le vendredi</p>
+                <p className="text-xl md:text-2xl text-white/90 mt-2 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
+                <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
               </div>
             </div>
           </div>

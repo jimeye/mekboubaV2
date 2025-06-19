@@ -34,18 +34,19 @@ export default function Newsletter() {
                 <div className="relative h-48 print:h-[80mm]">
                   <div className="absolute inset-0 flex items-center justify-center pt-12">
                     <div className="text-center relative w-full h-full">
-                      <p className="text-xl md:text-2xl text-white/80 mb-4 -mt-16 text-[1.2em]">*Uniquement le vendredi</p>
+                      <p className="text-xl md:text-2xl text-white/90 mb-1 -mt-16 text-[1.2em]">*Uniquement le vendredi</p>
+                      <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
                       <Image
                         src="/images/logo ile.png"
                         alt="Logo"
                         width={150}
                         height={150}
-                        className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 -translate-y-24"
+                        className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 -translate-y-16"
                         unoptimized
                       />
-                      <a href="http://localhost:3001/newsletter" target="_blank" rel="noopener noreferrer" className="block relative z-10">
-                        <h1 className="text-3xl font-bold text-white mb-6">🌶️ MEKBOUBA, BOULETTES & PIMENT 🌶️</h1>
-                        <p className="text-3xl text-white mt-20 print:mt-20 print:relative print:top-0">Maintenant à Ibiza</p>
+                      <a href="https://mekbouba.vercel.app" target="_blank" rel="noopener noreferrer" className="block relative z-10">
+                        <h1 className="text-4xl font-bold text-white mb-6 scale-[1.26]">🌶️ MEKBOUBA, BOULETTES & PIMENT 🌶️</h1>
+                        <p className="text-3xl text-white mt-40 print:mt-40 print:relative print:top-0">Maintenant à Ibiza</p>
                       </a>
                     </div>
                   </div>
@@ -53,7 +54,7 @@ export default function Newsletter() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
               {/* Sandwich Boulettes Mekbouba */}
               <div className="rounded-lg shadow-lg overflow-hidden flex-1 max-w-sm flex flex-col relative border-2 border-accent-red bg-black/70 min-h-[28rem]">
                 <div className="absolute inset-0 z-0">
