@@ -15,7 +15,7 @@ const slides = [
     id: 1,
     image: '/images/mekbouba1.jpeg',
     title: 'Cuisine Judéo-Tunisienne',
-    description: 'Une Expérience Culinaire Unique À Ibiza Kosher Friendly'
+    description: 'Une Expérience Culinaire Unique<br/>À Ibiza Kosher Friendly'
   },
   {
     id: 2,
@@ -92,7 +92,7 @@ export default function HeroSlider() {
               <div className="absolute inset-0 bg-black/30" />
               <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10">
                 <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">{slide.title}</h1>
-                <p className="text-xl md:text-2xl text-center max-w-2xl px-4">{slide.description}</p>
+                <p className="text-xl md:text-2xl text-center max-w-2xl px-4" dangerouslySetInnerHTML={{ __html: slide.description }}></p>
                 <a 
                   href="#menu"
                   className="mt-6 bg-accent-red hover:bg-accent-red/90 text-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300"
