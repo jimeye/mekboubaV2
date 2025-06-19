@@ -39,7 +39,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-6 flex flex-col flex-grow relative z-10">
-                    <h3 className="text-2xl font-bold mb-4 text-center text-white">Sandwich Boulettes Mekbouba SBM</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-center text-white">Sandwich Boulettes<br/>Mekbouba SBM</h3>
                     <p className="text-white mb-2 text-center flex-grow">Découvrez notre sandwich signature aux boulettes, piment, mekbouba & oeuf, une explosion de saveurs tunisiennes.</p>
                     <p className="text-white mb-6 text-center">*free delivery pour 5 SBM</p>
                     <a 
@@ -65,7 +65,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-6 flex flex-col flex-grow relative z-10">
-                    <h3 className="text-2xl font-bold mb-4 text-center text-white">Box Boulettes Mekbouba BBM</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-center text-white">Box Boulettes<br/>Mekbouba BBM</h3>
                     <p className="text-white mb-2 text-center flex-grow">La mème que le SBM boulettes, piment,<br />mekbouba & oeuf dans une box.</p>
                     <p className="text-white mb-6 text-center">*free delivery pour 5 BBM</p>
                     <a 
