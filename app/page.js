@@ -66,7 +66,7 @@ export default function Home() {
                   </div>
                   <div className="p-6 flex flex-col flex-grow relative z-10">
                     <h3 className="text-2xl font-bold mb-4 text-center text-white">Box Boulettes Mekbouba BBM</h3>
-                    <p className="text-white mb-2 text-center flex-grow">La mème que le SBM boulettes, piment, mekbouba & oeuf dans une box.</p>
+                    <p className="text-white mb-2 text-center flex-grow">La mème que le SBM boulettes, piment,<br />mekbouba & oeuf dans une box.</p>
                     <p className="text-white mb-6 text-center">*free delivery pour 5 BBM</p>
                     <a 
                       href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !"
