@@ -51,8 +51,8 @@ export default function Footer() {
               Facebook
             </a>
           </div>
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Mekbouba. Tous droits réservés.
+          <p className="text-white text-sm">
+            © 2025 MEKBOUBA, BOULETTES & PIMENTS 🌶️
           </p>
         </div>
       </div>

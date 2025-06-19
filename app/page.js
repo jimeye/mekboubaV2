@@ -115,12 +115,14 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Contact</h3>
               <a href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gray-200 transition-colors block mb-2">Téléphone: +33 6 52 69 69 76</a>
-              <a href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gray-200 transition-colors">Email: contact@mekbouba.fr</a>
+              <a href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gray-200 transition-colors block mb-2">Email: contact@mekbouba.fr</a>
+              <a href="https://wa.me/33608251223" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gray-200 transition-colors">Website design by ©MEKBOUBA STUDIO 🌶️</a>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-4">Pré-Commande Obligatoire</h3>
               <p className="text-sm mb-2">Lundi - Jeudi max 12h</p>
-              <p className="text-sm">Cuisine certifiée 100% Judéo-Tunisienne</p>
+              <p className="text-sm mb-2">Cuisine certifiée 100% Judéo-Tunisienne</p>
+              <p className="text-sm">© 2025 MEKBOUBA, BOULETTES & PIMENTS 🌶️</p>
             </div>
           </div>
         </div>
