@@ -34,6 +34,7 @@ export default function Newsletter() {
                 <div className="relative h-48 print:h-[80mm]">
                   <div className="absolute inset-0 flex items-center justify-center pt-12">
                     <div className="text-center relative w-full h-full">
+                      <p className="text-xl text-white/80 mb-4 -mt-16">*Uniquement le vendredi</p>
                       <Image
                         src="/images/logo ile.png"
                         alt="Logo"
