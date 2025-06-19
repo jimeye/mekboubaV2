@@ -27,7 +27,7 @@ const slides = [
     id: 4,
     image: '/images/slider4-small.jpg',
     title: 'Mekbouba',
-    description: 'Poivrons, piments, tomates & zeit'
+    description: 'Poivrons, Piments, Tomates & Zeit'
   }
 ];
 
