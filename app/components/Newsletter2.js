@@ -45,8 +45,8 @@ export default function Newsletter() {
                         unoptimized
                       />
                       <a href="https://mekbouba.vercel.app" target="_blank" rel="noopener noreferrer" className="block relative z-10">
-                        <h1 className="text-4xl font-bold text-white mb-6 scale-[1.26]">🌶️ MEKBOUBA, BOULETTES & PIMENT 🌶️</h1>
-                        <p className="text-3xl text-white mt-40 print:mt-40 print:relative print:top-0">Maintenant à Ibiza</p>
+                        <h1 className="text-4xl font-bold text-white mb-6 scale-[1.07]">🌶️ MEKBOUBA, BOULETTES & PIMENT 🌶️</h1>
+                        <p className="text-3xl text-white mt-48 print:mt-48 print:relative print:top-0">Maintenant à Ibiza</p>
                       </a>
                     </div>
                   </div>
