@@ -37,7 +37,7 @@ export default function Footer() {
             <h3 className="text-xl font-semibold mb-4">Contact</h3>
             <p className="text-gray-400 mb-2">Carrer de sa Creu, 07800</p>
             <p className="text-gray-400 mb-2">Ibiza, Espagne</p>
-            <p className="text-gray-400">+34 123 456 789</p>
+            <p className="text-gray-400">+33 6 52 69 69 76</p>
           </div>
         </div>
 
