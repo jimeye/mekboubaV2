@@ -61,7 +61,7 @@ export default function HeroSlider() {
 
         {/* Logo mobile */}
         <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 block landscape:hidden md:hidden">
-          <div className="relative w-32 h-32 md:w-52 md:h-52">
+          <div className="relative w-32 h-32 md:w-52 md:h-52 scale-[1.46]">
             <Image
               src="/images/logoile.png"
               alt="Logo Ile"
