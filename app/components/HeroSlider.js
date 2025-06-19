@@ -20,7 +20,7 @@ const slides = [
   {
     id: 2,
     image: '/images/nos specialites.jpg',
-    title: 'Box Boulettes Mekbouba',
+    title: 'Boulettes Marchi',
     description: 'Boeuf, Oignons, Persil, Coriandre & Rose'
   },
   {
