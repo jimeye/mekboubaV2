@@ -14,7 +14,7 @@ const slides = [
   {
     id: 1,
     image: '/images/mekbouba1.jpeg',
-    title: 'Cuisine Tunisienne',
+    title: 'Cuisine Judéo-Tunisienne',
     description: 'Une Expérience Culinaire Unique À Ibiza Kosher Friendly'
   },
   {
