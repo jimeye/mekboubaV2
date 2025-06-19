@@ -21,7 +21,7 @@ const slides = [
     id: 2,
     image: '/images/nos specialites.jpg',
     title: 'Boulettes Marchi',
-    description: 'Boeuf, Oignons, Persil, Coriandre & Rose'
+    description: 'Boeuf, Oignons, Persil,<br/>Coriandre & Rose'
   },
   {
     id: 4,
