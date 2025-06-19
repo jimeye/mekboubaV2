@@ -46,7 +46,7 @@ export default function HeroSlider() {
     <div className="relative h-screen overflow-hidden">
       <div className="relative w-full h-screen">
         {/* Logo fixe */}
-        <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden md:block md:left-[70%] md:translate-x-0">
+        <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden md:block">
           <div className="relative w-32 h-32 md:w-52 md:h-52">
             <Image
               src="/images/logoile.png"
