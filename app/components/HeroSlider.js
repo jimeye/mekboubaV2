@@ -99,7 +99,7 @@ export default function HeroSlider() {
                 >
                   Notre Menu
                 </a>
-                <p className="text-base md:text-lg text-white/80 mt-2">*Uniquement le vendredi</p>
+                <p className="text-lg md:text-xl text-white/80 mt-2">*Uniquement le vendredi</p>
               </div>
             </div>
           </div>
