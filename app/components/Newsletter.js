@@ -34,7 +34,7 @@ export default function Newsletter() {
                 <div className="relative h-48 print:h-[80mm]">
                   <div className="absolute inset-0 flex items-center justify-center pt-12">
                     <div className="text-center relative w-full h-full">
-                      <p className="text-xl text-white/80 mb-4 -mt-16">*Uniquement le vendredi</p>
+                      <p className="text-xl md:text-2xl text-white/80 mb-4 -mt-16 text-[1.2em]">*Uniquement le vendredi</p>
                       <Image
                         src="/images/logo ile.png"
                         alt="Logo"
@@ -66,7 +66,7 @@ export default function Newsletter() {
                   />
                 </div>
                 <div className="relative z-10 p-6 flex flex-col h-full">
-                  <h2 className="text-2xl font-bold mb-4 text-white">Sandwich Boulettes Mekbouba</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-white text-center">Sandwich Boulettes<br/>Mekbouba SBM</h2>
                   <p className="text-white mb-6 flex-grow">
                     Découvrez notre sandwich signature : des boulettes de bœuf hachées fraîches, 
                     marinées dans nos épices secrètes, servies dans un pain frais avec nos sauces 
@@ -95,7 +95,7 @@ export default function Newsletter() {
                   />
                 </div>
                 <div className="relative z-10 p-6 flex flex-col h-full">
-                  <h2 className="text-2xl font-bold mb-4 text-white">Box Boulettes Mekbouba</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-white text-center">Box Boulettes<br/>Mekbouba BBM</h2>
                   <p className="text-white mb-6 flex-grow">
                     Notre box complète : 4 boulettes de bœuf hachées fraîches, riz parfumé, 
                     salade fraîche, sauces maison et piment du Maroc. Parfait pour un repas 
@@ -121,7 +121,7 @@ export default function Newsletter() {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Contact</h3>
                   <a href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gray-200 transition-colors block mb-2">Téléphone: +33 6 52 69 69 76</a>
-                  <a href="https://wa.me/33756872352?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gray-200 transition-colors">Email: contact@mekbouba.fr</a>
+                  <a href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gray-200 transition-colors">Email: contact@mekbouba.fr</a>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Pré-Commande Obligatoire</h3>

@@ -20,14 +20,14 @@ const slides = [
   {
     id: 2,
     image: '/images/nos specialites.jpg',
-    title: 'Boulettes Marchi',
+    title: 'Box Boulettes Mekbouba',
     description: 'Boeuf, Oignons, Persil, Coriandre & Rose'
   },
   {
     id: 4,
     image: '/images/slider4-small.jpg',
     title: 'Mekbouba',
-    description: 'Poivrons, Piments, Tomates & Zeit'
+    description: 'POIVRONS, PIMENTS, TOMATES & ZEIT'
   }
 ];
 
@@ -99,7 +99,7 @@ export default function HeroSlider() {
                 >
                   Notre Menu
                 </a>
-                <p className="text-lg md:text-xl text-white/80 mt-2">*Uniquement le vendredi</p>
+                <p className="text-xl md:text-2xl text-white/80 mt-2 text-[1.2em]">*Uniquement le vendredi</p>
               </div>
             </div>
           </div>
