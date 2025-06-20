@@ -112,9 +112,10 @@ export default function HomeNew() {
               />
               <div className="absolute inset-0 bg-black/30" />
               
-              {/* Logo fixe */}
-              <div className="absolute top-[15%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden md:block">
-                <div className="relative w-32 h-32 md:w-52 md:h-52">
+              {/* Contenu du slide avec logo intégré */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 p-4">
+                {/* Logo */}
+                <div className="relative w-32 h-32 md:w-52 md:h-52 mb-4">
                   <Image
                     src="/images/logoile.png"
                     alt="Logo Ile"
@@ -124,24 +125,8 @@ export default function HomeNew() {
                     priority
                   />
                 </div>
-              </div>
 
-              {/* Logo mobile */}
-              <div className="absolute top-[15%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 block landscape:hidden md:hidden">
-                <div className="relative w-32 h-32 md:w-52 md:h-52 scale-[1.46]">
-                  <Image
-                    src="/images/logoile.png"
-                    alt="Logo Ile"
-                    fill
-                    className="object-contain"
-                    unoptimized
-                    priority
-                  />
-                </div>
-              </div>
-
-              {/* Contenu du slide */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10">
+                {/* Texte */}
                 <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">{slide.title}</h1>
                 <p className="text-xl md:text-2xl text-center max-w-2xl px-4" dangerouslySetInnerHTML={{ __html: slide.description }}></p>
                 <a 
