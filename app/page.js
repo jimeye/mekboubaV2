@@ -196,7 +196,7 @@ export default function HomeNew() {
             src="/images/une experience unique.jpg"
             alt=""
             fill
-            className="object-cover opacity-15"
+            className="object-cover opacity-45"
             unoptimized
           />
         </div>
@@ -351,9 +351,6 @@ export default function HomeNew() {
                     unoptimized
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="text-white text-2xl">📸</div>
-                    </div>
                   </div>
                 </div>
               </div>
