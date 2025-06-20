@@ -45,7 +45,7 @@ export default function Navbar() {
       </div>
 
       {/* Navigation flottante - visible sur mobile ET desktop */}
-      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40">
+      <div className="fixed right-4 top-1/3 md:top-1/2 transform -translate-y-1/2 z-40">
         <div className="bg-transparent rounded-full p-2">
           <nav className="flex flex-col space-y-2">
             {[
