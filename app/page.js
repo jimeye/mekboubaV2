@@ -174,7 +174,7 @@ export default function HomeNew() {
             </div>
             
             <div className="relative">
-              <div className="relative h-full min-h-[500px] overflow-hidden shadow-2xl">
+              <div className="relative h-full min-h-[500px] overflow-hidden shadow-2xl border-2 border-accent-red">
                 <Image
                   src="/images/mekbouba1.jpeg"
                   alt="Cuisine traditionnelle"
@@ -227,7 +227,7 @@ export default function HomeNew() {
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Sandwich Boulettes<br/>Mekbouba SBM</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Sandwich Boulettes<br/>Mekbouba SBM<br/>26 €</h3>
                   <p className="text-gray-600 mb-4 text-center flex-grow leading-relaxed">
                     Découvrez notre sandwich signature aux boulettes, piment, mekbouba & oeuf, 
                     une explosion de saveurs tunisiennes authentiques.
@@ -243,7 +243,7 @@ export default function HomeNew() {
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
                   >
-                    🥪 Commander 26€
+                    🥪 Commander
                   </a>
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function HomeNew() {
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Box Boulettes<br/>Mekbouba BBM</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Box Boulettes<br/>Mekbouba BBM<br/>26 €</h3>
                   <p className="text-gray-600 mb-4 text-center flex-grow leading-relaxed">
                     La même que le SBM boulettes, piment, mekbouba & oeuf dans une box complète 
                     avec accompagnements traditionnels.
@@ -281,7 +281,7 @@ export default function HomeNew() {
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
                   >
-                    🍽️ Commander 26€
+                    🍽️ Commander
                   </a>
                 </div>
               </div>
@@ -305,7 +305,7 @@ export default function HomeNew() {
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Tajines Shabbat</h3>
                   <p className="text-gray-600 mb-4 text-center flex-grow leading-relaxed">
-                    Nos tajines traditionnels, loubia, hams, nikitouche, classique légume, 
+                    Nos tajines traditionnels, loubia, hams, nikitouche, classique légumes, 
                     5 salades et sa semoule, parfaits pour vos repas entre amis.
                   </p>
                   <div className="bg-gray-50 p-3 rounded-lg mb-4">
@@ -339,9 +339,7 @@ export default function HomeNew() {
               '/images/mekbouba1.jpeg',
               '/images/nos specialites.jpg',
               '/images/une experience unique.jpg',
-              '/images/slider4-small.jpg',
-              '/images/une experience unique-small.jpg',
-              '/images/nos specialites-small.jpg'
+              '/images/slider4-small.jpg'
             ].map((image, index) => (
               <div key={index} className="group relative overflow-hidden shadow-lg">
                 <div className="relative h-64">
@@ -384,54 +382,63 @@ export default function HomeNew() {
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">Essentiel</h3>
+              <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Essentiel</h3>
               <div className="space-y-4 flex-grow text-center">
                 <div className="flex flex-col items-center space-y-2">
-                  <div className="text-2xl">📞</div>
+                  <div className="text-[2.3rem]">📞</div>
                   <div>
-                    <div className="text-white font-semibold">Téléphone</div>
-                    <a href="https://wa.me/33652696976" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent-red transition-colors">
+                    <div className="text-white font-semibold text-[1.15rem]">Téléphone</div>
+                    <a href="https://wa.me/33652696976" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent-red transition-colors text-[1.15rem]">
                       +33 6 52 69 69 76
                     </a>
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-2">
-                  <div className="text-2xl">📧</div>
+                  <div className="text-[2.3rem]">📧</div>
                   <div>
-                    <div className="text-white font-semibold">Email</div>
-                    <a href="mailto:contact@mekbouba.fr" className="text-white hover:text-accent-red transition-colors">
+                    <div className="text-white font-semibold text-[1.15rem]">Email</div>
+                    <a href="mailto:contact@mekbouba.fr" className="text-white hover:text-accent-red transition-colors text-[1.15rem]">
                       contact@mekbouba.fr
                     </a>
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-2">
-                  <div className="text-2xl">🌍</div>
+                  <div className="text-[2.3rem]">🌍</div>
                   <div>
-                    <div className="text-white font-semibold">Localisation</div>
-                    <div className="text-white hover:text-accent-red transition-colors duration-300">Ibiza, Espagne</div>
+                    <div className="text-white font-semibold text-[1.15rem]">Localisation</div>
+                    <a 
+                      href="https://maps.google.com/maps?q=38.96426,1.47936&z=15"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-accent-red transition-colors duration-300 cursor-pointer text-[1.15rem]"
+                      title="Ouvrir dans Plans, Waze ou Google Maps"
+                    >
+                      Ibiza, Espagne
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">Pré-commande obligatoire</h3>
+              <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Pré-commande obligatoire</h3>
               <div className="space-y-4 text-white flex-grow text-center">
-                <div className="hover:text-accent-red transition-colors duration-300">
+                <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
                   Lundi - Jeudi max 12h
                 </div>
-                <div className="hover:text-accent-red transition-colors duration-300">
+                <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
                   Kosher Friendly
                 </div>
-                <div className="text-sm mt-4 hover:text-accent-red transition-colors duration-300">
-                  Cuisine certifiée 100% Judéo-Tunisienne
+                <div className="text-[1.15rem] mt-4 hover:text-accent-red transition-colors duration-300">
+                  Cuisine certifiée 100% Judéo-Tunisienne,<br />
+                  transmise de génération en génération.
                 </div>
               </div>
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
-              <h3 className="text-2xl font-bold text-white mb-6">Commander maintenant</h3>
-              <p className="text-white hover:text-accent-red transition-colors duration-300 mb-6 flex-grow text-center leading-relaxed px-4">
+              <h3 className="text-[2.3rem] font-bold text-white mb-6">Commander maintenant</h3>
+              <p className="text-white hover:text-accent-red transition-colors duration-300 mb-6 flex-grow text-center leading-relaxed px-4 text-[0.92rem]">
                 Prêt à découvrir nos saveurs authentiques ?<br />
                 Commandez directement via WhatsApp !
               </p>
@@ -439,9 +446,9 @@ export default function HomeNew() {
                 href="https://wa.me/33652696976?text=Bonjour ! Je souhaite commander vos délicieuses spécialités Mekbouba. Pouvez-vous me donner plus d'informations ?"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto"
+                className="inline-flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-[0.92rem]"
               >
-                <span className="text-2xl">💬</span>
+                <span className="text-[1.84rem]">💬</span>
                 <span>Commander sur WhatsApp</span>
               </a>
             </div>
@@ -454,9 +461,10 @@ export default function HomeNew() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">MEKBOUBA</h3>
+              <h3 className="text-xl font-bold mb-4">MEKBOUBA, BOULETTES & PIMENTS 🌶️</h3>
               <p className="text-sm text-gray-200 mb-4">
-                Cuisine certifiée 100% Judéo-Tunisienne, transmise de génération en génération.
+                Cuisine certifiée 100% Judéo-Tunisienne,<br />
+                transmise de génération en génération.
               </p>
               <div className="flex space-x-4">
                 <div className="text-2xl">🌶️</div>
@@ -487,8 +495,8 @@ export default function HomeNew() {
                 <div>⏰ Lundi - Jeudi max 12h</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
                 <div className="mt-4">
-                  <a href="https://wa.me/33608251223" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-gray-200 transition-colors">
-                    Website design by ©MEKBOUBA STUDIO 🌶️
+                  <a href="https://wa.me/33608251223?text=Je veux le meme site !!" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-gray-200 transition-colors">
+                    Website design by ©MEKBOUBA STUDIO
                   </a>
                 </div>
               </div>

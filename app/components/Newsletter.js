@@ -79,7 +79,7 @@ export default function Newsletter() {
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-2 rounded-lg font-semibold transition-colors duration-300 mt-auto"
                   >
-                    🥪 Commander 26€
+                    🥪 Commander
                   </a>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export default function Newsletter() {
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-2 rounded-lg font-semibold transition-colors duration-300 mt-auto"
                   >
-                    🍽️ Commander 26€
+                    🍽️ Commander
                   </a>
                 </div>
               </div>
