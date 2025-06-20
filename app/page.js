@@ -434,7 +434,7 @@ export default function HomeNew() {
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
-              <h3 className="text-[2.3rem] font-bold text-white mb-6">Commander maintenant</h3>
+              <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Commander maintenant</h3>
               <p className="text-white hover:text-accent-red transition-colors duration-300 mb-6 flex-grow text-center leading-relaxed px-4 text-[0.92rem]">
                 Prêt à découvrir nos saveurs authentiques ?<br />
                 Commandez directement via WhatsApp !
