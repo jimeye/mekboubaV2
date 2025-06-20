@@ -113,9 +113,9 @@ export default function HomeNew() {
               <div className="absolute inset-0 bg-black/30" />
               
               {/* Contenu du slide avec logo intégré */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 p-4">
+              <div className="absolute inset-0 flex flex-col items-center justify-start text-white z-10 p-4 pt-20 md:pt-0 md:justify-center">
                 {/* Logo */}
-                <div className="relative w-32 h-32 md:w-52 md:h-52 mb-4">
+                <div className="relative w-32 h-32 md:w-52 md:h-52 mb-4 mt-8 md:mt-0">
                   <Image
                     src="/images/logoile.png"
                     alt="Logo Ile"
