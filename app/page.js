@@ -46,7 +46,7 @@ export default function Home() {
                       href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-300 mt-auto"
+                      className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-2 rounded-lg font-semibold transition-colors duration-300 mt-auto"
                     >
                       Commander 26€
                     </a>
@@ -72,7 +72,7 @@ export default function Home() {
                       href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-300 mt-auto"
+                      className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-2 rounded-lg font-semibold transition-colors duration-300 mt-auto"
                     >
                       Commander 26€
                     </a>
