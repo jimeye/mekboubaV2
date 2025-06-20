@@ -58,14 +58,14 @@ export default function Navbar() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
+                className={`p-2 md:p-3 rounded-full transition-all duration-300 hover:scale-110 ${
                   activeSection === item.id 
                     ? 'bg-accent-red text-white shadow-lg' 
                     : 'bg-transparent text-white hover:bg-accent-red/20'
                 }`}
                 title={item.label}
               >
-                <span className="text-lg">{item.icon}</span>
+                <span className="text-sm md:text-lg">{item.icon}</span>
               </button>
             ))}
           </nav>
