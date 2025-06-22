@@ -128,9 +128,6 @@ export default function HomeNew() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     unoptimized
                   />
-                  <div className="absolute top-4 right-4 bg-accent-red text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    🌶️ Signature
-                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Sandwich Boulettes<br/>Mekbouba SBM<br/>26 €</h3>
@@ -147,9 +144,10 @@ export default function HomeNew() {
                     href="/reservation"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
+                    className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-base"
                   >
-                    🥪 Réserver
+                    <span className="text-[1.84rem]">🥪</span>
+                    <span>Réserver</span>
                   </Link>
                 </div>
               </div>
@@ -166,9 +164,6 @@ export default function HomeNew() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     unoptimized
                   />
-                  <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    🍽️ Complet
-                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Box Boulettes<br/>Mekbouba BBM<br/>26 €</h3>
@@ -185,9 +180,10 @@ export default function HomeNew() {
                     href="/reservation"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
+                    className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-base"
                   >
-                    🍽️ Réserver
+                    <span className="text-[1.84rem]">🍱</span>
+                    <span>Réserver</span>
                   </Link>
                 </div>
               </div>
@@ -204,9 +200,6 @@ export default function HomeNew() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     unoptimized
                   />
-                  <div className="absolute top-4 right-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    🔜 Coming Soon
-                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Tajines Shabbat<br/>35 €</h3>
@@ -220,10 +213,11 @@ export default function HomeNew() {
                     </p>
                   </div>
                   <button 
-                    className="block w-full bg-gray-400 text-white text-center py-4 rounded-xl font-semibold cursor-not-allowed mt-auto"
+                    className="inline-flex items-center justify-center space-x-2 bg-gray-400 text-white px-5 py-1.5 rounded-xl font-semibold cursor-not-allowed w-full text-center mt-auto text-base"
                     disabled
                   >
-                    🔜 Coming Soon
+                    <span className="text-[1.84rem]">🔜</span>
+                    <span>Coming Soon</span>
                   </button>
                 </div>
               </div>
