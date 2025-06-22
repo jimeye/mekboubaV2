@@ -142,7 +142,7 @@ export default function HeroSliderNew({ images }) {
                     lancement officiel le 30/06 !
                   </Link>
                   <p className="text-lg md:text-xl text-white/80 mt-2 text-center">
-                    Passez votre commande Lundi - Jeudi max 12h<br />
+                    Passez votre commande<br className="md:hidden" /> Lundi - Jeudi max 12h<br />
                     Vous serez livrés vendredi
                   </p>
                 </div>
