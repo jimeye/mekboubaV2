@@ -115,7 +115,7 @@ export default function HomeNew() {
               {/* Contenu du slide avec logo intégré */}
               <div className="absolute inset-0 flex flex-col items-center justify-start text-white z-10 p-4 pt-20 md:pt-0 md:justify-center">
                 {/* Logo */}
-                <div className="relative w-40 h-40 md:w-52 md:h-52 mb-4 mt-8 md:mt-0 landscape:hidden">
+                <div className="relative w-40 h-40 md:w-52 md:h-52 mb-4 mt-8 md:mt-0">
                   <Image
                     src="/images/logoile.png"
                     alt="Logo Ile"
@@ -137,6 +137,16 @@ export default function HomeNew() {
                 </a>
                 <p className="text-xl md:text-2xl text-white/90 mt-2 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
                 <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
+                <a 
+                  href="https://wa.me/33652696976?text=Envie de régaler vos papilles ? %0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm md:text-base text-white hover:text-accent-red text-[0.63em] mt-1 text-center block transition-all duration-300 hover:scale-110"
+                >
+                  Réservez votre plaisir dès maintenant
+                  <br />
+                  lancement officiel le 30/06 !
+                </a>
               </div>
             </div>
           </div>
