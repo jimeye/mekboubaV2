@@ -180,7 +180,7 @@ export default function HeroSliderNew() {
       </div>
       
       {/* Navigation Dots */}
-      <div className="fixed bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-1 md:space-x-2 z-30">
+      <div className="fixed bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-1 md:space-x-2 z-30 hidden">
         {slides.map((_, index) => (
           <button
             key={index}
