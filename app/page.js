@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Navbar from './components/Navbar';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import HeroSliderNew from './components/HeroSliderNew';
 
 const heroImages = [
@@ -39,24 +39,6 @@ export default function HomeNew() {
   const handleSliderScroll = (isScrolledOnSlider) => {
     setIsHeaderVisible(!isScrolledOnSlider);
   };
-  
-  useEffect(() => {
-    const handlePageScroll = () => {
-      // Si on a scrollé au-delà de la section hero, on ré-affiche le header
-      const heroSection = document.getElementById('hero');
-      if (heroSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        if (window.scrollY > heroBottom) {
-          setIsHeaderVisible(true);
-        } else if (window.scrollY < 100) { // Pour le cas où on remonte tout en haut
-          // La visibilité est déjà gérée par handleSliderScroll, on ne fait rien ici
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handlePageScroll);
-    return () => window.removeEventListener('scroll', handlePageScroll);
-  }, []);
 
   return (
     <main className="min-h-screen bg-white">
@@ -161,12 +143,14 @@ export default function HomeNew() {
                       🚚 Livraison gratuite pour 5 SBM
                     </p>
                   </div>
-                  <a 
+                  <Link 
                     href="/reservation"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
                   >
                     🥪 Réserver
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -197,14 +181,14 @@ export default function HomeNew() {
                       🚚 Livraison gratuite pour 5 BBM
                     </p>
                   </div>
-                  <a 
-                    href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !"
+                  <Link 
+                    href="/reservation"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
                   >
                     🍽️ Réserver
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -365,7 +349,7 @@ export default function HomeNew() {
                 Commandez directement via WhatsApp !
               </p>
               <a 
-                href="https://wa.me/33652696976?text=Bonjour ! Je souhaite commander vos délicieuses spécialités Mekbouba. Pouvez-vous me donner plus d'informations ?"
+                href="/reservation"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-base"
