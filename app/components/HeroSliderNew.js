@@ -116,7 +116,7 @@ export default function HeroSliderNew({ images, onSliderScroll }) {
                 <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
                 
                 {/* Lien de réservation avec ID unique */}
-                <div className="mt-20 relative z-50">
+                <div className="mt-16 md:mt-20 relative z-50">
                   <Link 
                     href="/reservation"
                     id="reservation-link-slider"
