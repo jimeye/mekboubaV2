@@ -104,7 +104,7 @@ export default function HomeNew() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative min-h-screen bg-white py-20">
+      <section id="about" className="relative min-h-screen bg-white py-20 hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-800 mb-6">Notre Histoire</h2>
@@ -285,7 +285,7 @@ export default function HomeNew() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="relative min-h-screen bg-white py-20">
+      <section id="gallery" className="relative min-h-screen bg-white py-20 hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-800 mb-6">Diner Room</h2>
@@ -379,7 +379,10 @@ export default function HomeNew() {
               <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Pré-commande obligatoire</h3>
               <div className="space-y-4 text-white flex-grow text-center">
                 <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
-                  Lundi - Jeudi max 12h
+                  ⏰ passez votre commande Lundi - Jeudi max 12h
+                  </div>
+                <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
+                  Vous serez livrer vendredi !
                   </div>
                 <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
                   Kosher Friendly
@@ -453,7 +456,8 @@ export default function HomeNew() {
               <h3 className="text-xl font-bold mb-4">Informations</h3>
               <div className="space-y-2 text-sm text-gray-200">
                 <div>📅 Pré-commande obligatoire</div>
-                <div>⏰ Lundi - Jeudi max 12h</div>
+                <div>⏰ passez votre commande Lundi - Jeudi max 12h</div>
+                <div>Vous serez livrer vendredi !</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
               </div>
             </div>
