@@ -290,7 +290,7 @@ TOTAL À PAYER: ${total}€
                   <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <div className="flex justify-between items-center">
                           <h3 className="font-semibold text-lg">🥪 Sandwich Boulettes Mekbouba 26 €</h3>
-                          <button type="button" onClick={() => addItem('sbm')} className="bg-accent-red text-white px-4 py-2 rounded-lg font-semibold">+ Ajouter</button>
+                          <button type="button" onClick={() => addItem('sbm')} className="bg-accent-red text-white px-2 md:px-4 py-1 md:py-2 rounded-lg font-semibold text-sm md:text-base">+ Ajouter</button>
                       </div>
                       {formData.sbmItems.map((item, index) => (
                           <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
@@ -314,7 +314,7 @@ TOTAL À PAYER: ${total}€
                   <div className="bg-gray-50 p-4 rounded-lg">
                       <div className="flex justify-between items-center">
                           <h3 className="font-semibold text-lg">🍴 Box Boulettes BBM 26 €</h3>
-                          <button type="button" onClick={() => addItem('bbm')} className="bg-accent-red text-white px-4 py-2 rounded-lg font-semibold">+ Ajouter</button>
+                          <button type="button" onClick={() => addItem('bbm')} className="bg-accent-red text-white px-2 md:px-4 py-1 md:py-2 rounded-lg font-semibold text-sm md:text-base">+ Ajouter</button>
                       </div>
                       {formData.bbmItems.map((item, index) => (
                           <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
