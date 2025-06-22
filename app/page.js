@@ -309,35 +309,35 @@ export default function HomeNew() {
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
-              <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Essentiel</h3>
+              <h3 className="text-[1.7rem] font-bold text-white mb-6 text-center">Essentiel</h3>
               <div className="space-y-4 flex-grow text-center">
                 <div className="flex flex-col items-center space-y-2">
-                  <div className="text-[2.3rem]">📞</div>
+                  <div className="text-[1.2rem]">📞</div>
                   <div>
-                    <div className="text-white font-semibold text-[1.15rem]">Téléphone</div>
-                    <a href="https://wa.me/33652696976" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent-red transition-colors text-[1.15rem]">
+                    <div className="text-white font-semibold text-base">Téléphone</div>
+                    <a href="https://wa.me/33652696976" target="_blank" rel="noopener noreferrer" className="text-white hover:text-accent-red transition-colors text-base">
                       +33 6 52 69 69 76
                     </a>
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-2">
-                  <div className="text-[2.3rem]">📧</div>
+                  <div className="text-[1.2rem]">📧</div>
                   <div>
-                    <div className="text-white font-semibold text-[1.15rem]">Email</div>
-                    <a href="mailto:contact@mekbouba.fr" className="text-white hover:text-accent-red transition-colors text-[1.15rem]">
+                    <div className="text-white font-semibold text-base">Email</div>
+                    <a href="mailto:contact@mekbouba.fr" className="text-white hover:text-accent-red transition-colors text-base">
                       contact@mekbouba.fr
                     </a>
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-2">
-                  <div className="text-[2.3rem]">🌍</div>
+                  <div className="text-[1.2rem]">🌍</div>
                   <div>
-                    <div className="text-white font-semibold text-[1.15rem]">Localisation</div>
+                    <div className="text-white font-semibold text-base">Localisation</div>
                     <a 
                       href="https://maps.google.com/maps?q=38.96426,1.47936&z=15"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white hover:text-accent-red transition-colors duration-300 cursor-pointer text-[1.15rem]"
+                      className="text-white hover:text-accent-red transition-colors duration-300 cursor-pointer text-base"
                       title="Ouvrir dans Plans, Waze ou Google Maps"
                     >
                       Ibiza, Espagne
@@ -348,21 +348,27 @@ export default function HomeNew() {
                 </div>
 
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
-              <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Pré-commande obligatoire</h3>
-              <div className="space-y-4 text-white flex-grow text-center">
-                <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
-                  ⏰ Passez votre commande Lundi - Jeudi max 12h
+              <h3 className="text-[1.7rem] font-bold text-white mb-6 text-center">Pré-commande obligatoire</h3>
+              <div className="space-y-4 flex-grow text-center">
+                <div className="flex flex-col items-center space-y-2">
+                  <div className="text-[1.2rem]">⏰</div>
+                  <div className="text-base text-white hover:text-accent-red transition-colors duration-300">
+                    Passez votre commande du<br />
+                    Dimanche au Jeudi max 12h<br />
+                    Vous serez livrés le vendredi
                   </div>
-                <div>Vous serez livrer vendredi !</div>
-                <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
-                  Kosher Friendly
+                </div>
+                <div className="flex flex-col items-center space-y-2 mt-4">
+                  <div className="text-base text-white hover:text-accent-red transition-colors duration-300">
+                    Kosher Friendly
+                  </div>
                 </div>
               </div>
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
-              <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Commander maintenant</h3>
-              <p className="text-white hover:text-accent-red transition-colors duration-300 mb-6 flex-grow text-center leading-relaxed px-4 text-[0.92rem]">
+              <h3 className="text-[1.7rem] font-bold text-white mb-6 text-center">Commander maintenant</h3>
+              <p className="text-white hover:text-accent-red transition-colors duration-300 mb-6 flex-grow text-center leading-relaxed px-4 text-base">
                 Prêt à découvrir nos saveurs authentiques ?<br />
                 Commandez directement via WhatsApp !
               </p>
@@ -370,7 +376,7 @@ export default function HomeNew() {
                 href="https://wa.me/33652696976?text=Bonjour ! Je souhaite commander vos délicieuses spécialités Mekbouba. Pouvez-vous me donner plus d'informations ?"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-[0.92rem]"
+                className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-base"
               >
                 <span className="text-[1.84rem]">💬</span>
                 <span>Réserver</span>

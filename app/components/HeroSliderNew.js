@@ -125,7 +125,7 @@ export default function HeroSliderNew({ images }) {
                 >
                   Notre Menu
                 </a>
-                <p className="text-xl md:text-2xl text-white/90 mt-2 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
+                <p className="text-xl md:text-2xl text-white/90 mt-6 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
                 <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
                 
                 {/* Lien de réservation avec ID unique */}
@@ -141,9 +141,10 @@ export default function HeroSliderNew({ images }) {
                     Réservez votre plaisir dès maintenant<br />
                     lancement officiel le 30/06 !
                   </Link>
-                  <p className="text-lg md:text-xl text-white/80 mt-2 text-center">
-                    Passez votre commande<br className="md:hidden" /> Lundi - Jeudi max 12h<br />
-                    Vous serez livrés vendredi
+                  <p className="text-lg md:text-xl text-white/80 mt-6 text-center">
+                    Passez votre commande du<br />
+                    Dimanche au Jeudi max 12h<br />
+                    Vous serez livrés le vendredi
                   </p>
                 </div>
               </div>
