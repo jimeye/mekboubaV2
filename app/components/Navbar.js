@@ -50,36 +50,6 @@ export default function Navbar() {
           <Logo />
         </div>
       </div>
-
-      {/* Navigation flottante - visible sur mobile ET desktop, sauf sur la page de réservation */}
-      {!isReservationPage && (
-        <div className={`fixed right-4 top-1/4 md:top-1/2 transform -translate-y-1/2 z-40 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <div className="bg-transparent rounded-full p-2">
-            <nav className="flex flex-col space-y-2">
-              {[
-                { id: 'hero', label: 'Accueil', icon: '🏠' },
-                { id: 'about', label: 'À propos', icon: '🌶️' },
-                { id: 'menu', label: 'Menu', icon: '🍽️' },
-                { id: 'gallery', label: 'Galerie', icon: '📸' },
-                { id: 'contact', label: 'Contact', icon: '📞' }
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`p-2 md:p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-                    activeSection === item.id 
-                      ? 'bg-accent-red text-white shadow-lg' 
-                      : 'bg-transparent text-white hover:bg-accent-red/20'
-                  }`}
-                  title={item.label}
-                >
-                  <span className="text-sm md:text-lg">{item.icon}</span>
-                </button>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
     </nav>
   )
 } 
