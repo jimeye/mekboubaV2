@@ -4,11 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function HeroSliderNew({ images }) {
+export default function HeroSliderNew({ images, onSliderScroll }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
-  const [isInSlider, setIsInSlider] = useState(true);
   const sliderRef = useRef(null);
 
   // Auto-play (optionnel, peut être désactivé)
@@ -20,23 +19,12 @@ export default function HeroSliderNew({ images }) {
     return () => clearInterval(timer);
   }, [images.length]);
 
-  // Détecter si on est dans la zone du slider
-  useEffect(() => {
-    const handleScroll = () => {
-      if (sliderRef.current) {
-        const aboutSection = document.getElementById('about');
-        if (aboutSection) {
-          const aboutTop = aboutSection.offsetTop;
-          const scrollPosition = window.scrollY;
-          // Le logo disparaît quand on commence à voir la section "Notre Histoire"
-          setIsInSlider(scrollPosition < aboutTop - 100);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleSliderScroll = (event) => {
+    const isScrolled = event.currentTarget.scrollTop > 1;
+    if (onSliderScroll) {
+      onSliderScroll(isScrolled);
+    }
+  };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % images.length);
@@ -79,26 +67,25 @@ export default function HeroSliderNew({ images }) {
     <div 
       ref={sliderRef}
       className="relative h-screen overflow-y-auto"
+      onScroll={handleSliderScroll}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
       <div className="relative w-full">
         {/* Logo mobile - visible seulement dans le slider */}
-        {isInSlider && (
-          <div className="fixed top-[17%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden">
-            <div className="relative w-32 h-32 md:w-52 md:h-52 scale-[1.46]">
-              <Image
-                src="/images/logo ile.png"
-                alt="Logo Ile"
-                fill
-                className="object-contain"
-                unoptimized
-                priority
-              />
-            </div>
+        <div className="fixed top-[17%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden">
+          <div className="relative w-32 h-32 md:w-52 md:h-52 scale-[1.46]">
+            <Image
+              src="/images/logo ile.png"
+              alt="Logo Ile"
+              fill
+              className="object-contain"
+              unoptimized
+              priority
+            />
           </div>
-        )}
+        </div>
 
         {/* Slides en scroll vertical */}
         {images.map((slide, index) => (

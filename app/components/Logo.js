@@ -1,24 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-export default function Logo() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      // Change de couleur exactement après la quatrième photo du slider vertical
-      setIsScrolled(scrollPosition > window.innerHeight * 3.5); // Après la 4ème image
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+export default function Logo({ isVisible }) {
   return (
     <div className={`text-white landscape:pl-6 md:pl-8 transition-all duration-300 ${
-      isScrolled ? 'opacity-0' : 'opacity-100'
+      isVisible ? 'opacity-100' : 'opacity-0'
     }`}>
       <h1 className="text-2xl md:text-3xl font-bold">
         MEKBOUBA, BOULETTES & PIMENTS 🌶️

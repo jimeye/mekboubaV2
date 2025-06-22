@@ -34,45 +34,37 @@ const heroImages = [
 ];
 
 export default function HomeNew() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
+  const handleSliderScroll = (isScrolledOnSlider) => {
+    setIsHeaderVisible(!isScrolledOnSlider);
+  };
+  
   useEffect(() => {
-    setIsVisible(true);
-    
-    const handleScroll = () => {
-      const sections = ['hero', 'about', 'menu', 'gallery', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-      
-      sections.forEach(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-          }
+    const handlePageScroll = () => {
+      // Si on a scrollé au-delà de la section hero, on ré-affiche le header
+      const heroSection = document.getElementById('hero');
+      if (heroSection) {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        if (window.scrollY > heroBottom) {
+          setIsHeaderVisible(true);
+        } else if (window.scrollY < 100) { // Pour le cas où on remonte tout en haut
+          // La visibilité est déjà gérée par handleSliderScroll, on ne fait rien ici
         }
-      });
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handlePageScroll);
+    return () => window.removeEventListener('scroll', handlePageScroll);
   }, []);
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar isVisible={isHeaderVisible} />
       
       {/* Hero Section avec Images à la Suite */}
       <section id="hero" className="relative">
-        <HeroSliderNew images={heroImages} />
+        <HeroSliderNew images={heroImages} onSliderScroll={handleSliderScroll} />
       </section>
 
       {/* About Section */}
