@@ -323,8 +323,7 @@ export default function HomeNew() {
                 <div className="flex flex-col items-center space-y-2">
                   <div className="text-[1.2rem]">⏰</div>
                   <div className="text-base text-white hover:text-accent-red transition-colors duration-300">
-                    Passez votre commande du<br />
-                    Dimanche au Jeudi max 12h<br />
+                    Passez votre commande du Dimanche au Jeudi max 12h<br />
                     Vous serez livrés le vendredi
                   </div>
                 </div>
@@ -398,7 +397,7 @@ export default function HomeNew() {
               <h3 className="text-xl font-bold mb-4">Informations</h3>
               <div className="space-y-2 text-sm text-gray-200">
                 <div>📅 Pré-commande obligatoire</div>
-                <div>⏰ Passez votre commande Lundi - Jeudi max 12h</div>
+                <div>⏰ Passez votre commande du Dimanche au Jeudi max 12h</div>
                 <div>Vous serez livrer vendredi !</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
               </div>

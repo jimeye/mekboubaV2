@@ -579,7 +579,7 @@ TOTAL À PAYER: ${total}€
               <h3 className="text-xl font-bold mb-4">Informations</h3>
               <div className="space-y-2 text-sm text-gray-200">
                 <div>📅 Pré-commande obligatoire</div>
-                <div>⏰ Lundi - Jeudi max 12h</div>
+                <div>⏰ Passez votre commande du Dimanche au Jeudi max 12h</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
               </div>
             </div>
