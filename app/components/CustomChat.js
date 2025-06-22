@@ -50,7 +50,7 @@ export default function CustomChat() {
       {/* Bouton de chat flottant */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 bg-accent-red/80 hover:bg-accent-red/90 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+        className="fixed bottom-6 right-4 z-50 bg-accent-red/80 hover:bg-accent-red/90 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
         aria-label="Ouvrir le chat"
       >
         {isOpen ? (
@@ -66,7 +66,7 @@ export default function CustomChat() {
 
       {/* Fenêtre de chat */}
       {isOpen && (
-        <div className="fixed bottom-20 right-6 z-40 w-80 h-96 bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
+        <div className="fixed bottom-20 right-4 z-40 w-80 h-96 bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
           {/* En-tête */}
           <div className="bg-accent-red text-white p-4 rounded-t-lg">
             <h3 className="font-bold text-lg">💬 Support Mekbouba</h3>
