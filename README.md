@@ -61,7 +61,7 @@ git push
 
 Pour toute question ou suggestion :
 - Téléphone : 07 56 87 23 52
-- Email : contact@mekbouba.fr
+- Email : info@mekbouba.com
 
 ## 📝 Notes
 

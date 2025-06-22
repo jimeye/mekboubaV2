@@ -560,8 +560,8 @@ TOTAL À PAYER: ${total}€
                 <a href="https://wa.me/33652696976" target="_blank" rel="noopener noreferrer" className="block hover:text-gray-200 transition-colors">
                   📞 +33 6 52 69 69 76
                 </a>
-                <a href="mailto:contact@mekbouba.fr" className="block hover:text-gray-200 transition-colors">
-                  📧 contact@mekbouba.fr
+                <a href="mailto:info@mekbouba.com" className="block hover:text-gray-200 transition-colors">
+                  📧 info@mekbouba.com
                 </a>
                 <a 
                   href="https://maps.google.com/maps?q=38.96426,1.47936&z=15"

@@ -294,8 +294,8 @@ export default function HomeNew() {
                   <div className="text-[1.2rem]">📧</div>
                   <div>
                     <div className="text-white font-semibold text-base">Email</div>
-                    <a href="mailto:contact@mekbouba.fr" className="text-white hover:text-accent-red transition-colors text-base">
-                      contact@mekbouba.fr
+                    <a href="mailto:info@mekbouba.com" className="text-white hover:text-accent-red transition-colors text-base">
+                      info@mekbouba.com
                     </a>
                   </div>
                 </div>
@@ -378,8 +378,8 @@ export default function HomeNew() {
                 <a href="https://wa.me/33652696976" target="_blank" rel="noopener noreferrer" className="block hover:text-gray-200 transition-colors">
                   📞 +33 6 52 69 69 76
                 </a>
-                <a href="mailto:contact@mekbouba.fr" className="block hover:text-gray-200 transition-colors">
-                  📧 contact@mekbouba.fr
+                <a href="mailto:info@mekbouba.com" className="block hover:text-gray-200 transition-colors">
+                  📧 info@mekbouba.com
                 </a>
                 <a 
                   href="https://maps.google.com/maps?q=38.96426,1.47936&z=15"
