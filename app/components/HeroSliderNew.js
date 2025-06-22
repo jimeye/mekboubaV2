@@ -4,34 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const slides = [
-  {
-    id: 3,
-    image: '/images/une experience unique.jpg',
-    title: 'Sandwich Boulettes Mekbouba',
-    description: 'Maintenant À Ibiza'
-  },
-  {
-    id: 1,
-    image: '/images/mekbouba1.jpeg',
-    title: 'Cuisine Judéo-Tunisienne',
-    description: 'Une Expérience Culinaire Unique<br/>À Ibiza Kosher Friendly'
-  },
-  {
-    id: 2,
-    image: '/images/nos specialites.jpg',
-    title: 'Boulettes Marchi',
-    description: 'Boeuf, Oignons, Persil,<br/>Coriandre & Rose'
-  },
-  {
-    id: 4,
-    image: '/images/slider4-small.jpg',
-    title: 'Mekbouba',
-    description: 'Poivrons, Piments, Tomates & Zeit'
-  }
-];
-
-export default function HeroSliderNew() {
+export default function HeroSliderNew({ images }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -41,11 +14,11 @@ export default function HeroSliderNew() {
   // Auto-play (optionnel, peut être désactivé)
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setCurrentSlide((prev) => (prev + 1) % images.length);
     }, 8000); // 8 secondes par slide
 
     return () => clearInterval(timer);
-  }, []);
+  }, [images.length]);
 
   // Détecter si on est dans la zone du slider
   useEffect(() => {
@@ -66,11 +39,11 @@ export default function HeroSliderNew() {
   }, []);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % images.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
   };
 
   const goToSlide = (index) => {
@@ -128,7 +101,7 @@ export default function HeroSliderNew() {
         )}
 
         {/* Slides en scroll vertical */}
-        {slides.map((slide, index) => (
+        {images.map((slide, index) => (
           <div
             key={slide.id}
             className="relative w-full h-screen"
@@ -162,13 +135,13 @@ export default function HeroSliderNew() {
                     id="reservation-link-slider"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm md:text-base text-white/80 hover:text-white transition-colors duration-300 cursor-pointer block text-center"
+                    className="text-lg md:text-xl text-white/80 hover:text-white transition-colors duration-300 cursor-pointer block text-center"
                     style={{ pointerEvents: 'auto' }}
                   >
                     Réservez votre plaisir dès maintenant<br />
                     lancement officiel le 30/06 !
                   </Link>
-                  <p className="text-sm md:text-base text-white/80 mt-2 text-center">
+                  <p className="text-lg md:text-xl text-white/80 mt-2 text-center">
                     Passez votre commande Lundi - Jeudi max 12h<br />
                     Vous serez livrés vendredi
                   </p>
@@ -181,7 +154,7 @@ export default function HeroSliderNew() {
       
       {/* Navigation Dots */}
       <div className="fixed bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-1 md:space-x-2 z-30 hidden">
-        {slides.map((_, index) => (
+        {images.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
