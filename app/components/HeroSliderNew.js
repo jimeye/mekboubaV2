@@ -168,6 +168,10 @@ export default function HeroSliderNew() {
                     Réservez votre plaisir dès maintenant<br />
                     lancement officiel le 30/06 !
                   </Link>
+                  <p className="text-sm md:text-base text-white/80 mt-2 text-center">
+                    Passez votre commande Lundi - Jeudi max 12h<br />
+                    Vous serez livrés vendredi
+                  </p>
                 </div>
               </div>
             </div>
