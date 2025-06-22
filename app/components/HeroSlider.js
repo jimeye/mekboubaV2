@@ -101,7 +101,7 @@ export default function HeroSlider() {
                 </a>
                 <p className="text-xl md:text-2xl text-white/90 mt-2 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
                 <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
-                <p className="text-sm md:text-base text-white/80 text-[0.55em] mt-1">Réservez votre plaisir dès maintenant – lancement officiel le 30/06 !</p>
+                <p className="text-sm md:text-base text-white/80 text-[0.55em] mt-24">Réservez votre plaisir dès maintenant – lancement officiel le 30/06 !</p>
               </div>
             </div>
           </div>

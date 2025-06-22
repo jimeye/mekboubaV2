@@ -215,7 +215,7 @@ export default function HomeNew() {
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-800 mb-6">Notre Menu</h2>
             <div className="w-24 h-1 bg-accent-red mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-black max-w-2xl mx-auto">
               Découvrez nos spécialités authentiques, préparées avec passion et des ingrédients de qualité
             </p>
           </div>
@@ -313,7 +313,7 @@ export default function HomeNew() {
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Tajines Shabbat</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Tajines Shabbat<br/>35 €</h3>
                   <p className="text-gray-600 mb-4 text-center flex-grow leading-relaxed">
                     Nos tajines traditionnels, loubia, hams, nikitouche, classique légumes, 
                     5 salades et sa semoule, parfaits pour vos repas entre amis.
