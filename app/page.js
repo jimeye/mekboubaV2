@@ -379,18 +379,12 @@ export default function HomeNew() {
               <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Pré-commande obligatoire</h3>
               <div className="space-y-4 text-white flex-grow text-center">
                 <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
-                  ⏰ passez votre commande Lundi - Jeudi max 12h
+                  ⏰ Passez votre commande Lundi - Jeudi max 12h
                   </div>
-                <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
-                  Vous serez livrer vendredi !
-                  </div>
+                <div>Vous serez livrer vendredi !</div>
                 <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
                   Kosher Friendly
                   </div>
-                <div className="text-[1.15rem] mt-4 hover:text-accent-red transition-colors duration-300">
-                  Cuisine certifiée 100% Judéo-Tunisienne,<br />
-                  transmise de génération en génération.
-                </div>
               </div>
             </div>
             
@@ -456,7 +450,7 @@ export default function HomeNew() {
               <h3 className="text-xl font-bold mb-4">Informations</h3>
               <div className="space-y-2 text-sm text-gray-200">
                 <div>📅 Pré-commande obligatoire</div>
-                <div>⏰ passez votre commande Lundi - Jeudi max 12h</div>
+                <div>⏰ Passez votre commande Lundi - Jeudi max 12h</div>
                 <div>Vous serez livrer vendredi !</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
               </div>
