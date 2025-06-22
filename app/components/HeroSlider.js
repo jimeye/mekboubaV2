@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const slides = [
   {
@@ -33,6 +34,7 @@ const slides = [
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -41,6 +43,12 @@ export default function HeroSlider() {
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleReservationClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    router.push('/reservation');
+  };
 
   return (
     <div className="relative h-screen overflow-hidden">
@@ -101,7 +109,12 @@ export default function HeroSlider() {
                 </a>
                 <p className="text-xl md:text-2xl text-white/90 mt-2 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
                 <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
-                <p className="text-sm md:text-base text-white/80 text-[0.55em] mt-24">Réservez votre plaisir dès maintenant – lancement officiel le 30/06 !</p>
+                <a 
+                  href="/reservation"
+                  className="text-sm md:text-base text-white/80 text-[0.55em] mt-24 hover:text-white transition-colors duration-300 cursor-pointer underline block relative z-50"
+                >
+                  Réservez votre plaisir dès maintenant – lancement officiel le 30/06 !
+                </a>
               </div>
             </div>
           </div>

@@ -1,6 +1,8 @@
 import { Inter, Lilita_One } from 'next/font/google';
 import './globals.css';
 import Navigation from './components/Navigation';
+import CustomChat from './components/CustomChat';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 const inter = Inter({ subsets: ['latin'] });
 const lilitaOne = Lilita_One({
@@ -20,6 +22,8 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} ${lilitaOne.variable}`}>
         <Navigation />
         {children}
+        <CustomChat />
+        <GoogleAnalytics />
       </body>
     </html>
   );

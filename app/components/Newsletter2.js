@@ -36,14 +36,6 @@ export default function Newsletter() {
                     <div className="text-center relative w-full h-full">
                       <p className="text-xl md:text-2xl text-white/90 mb-1 -mt-16 text-[1.2em]">*Uniquement le vendredi</p>
                       <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
-                      <Image
-                        src="/images/logo ile.png"
-                        alt="Logo"
-                        width={150}
-                        height={150}
-                        className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 -translate-y-16"
-                        unoptimized
-                      />
                       <a href="https://mekbouba.vercel.app" target="_blank" rel="noopener noreferrer" className="block relative z-10">
                         <h1 className="text-4xl font-bold text-white mb-6 scale-[1.07]">🌶️ MEKBOUBA, BOULETTES & PIMENT 🌶️</h1>
                         <p className="text-3xl text-white mt-48 print:mt-48 print:relative print:top-0">Maintenant à Ibiza</p>
@@ -79,7 +71,7 @@ export default function Newsletter() {
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-300 mt-auto print-link"
                   >
-                    🥪 Commander 26€
+                    🥪 Commander
                   </a>
                 </div>
               </div>
@@ -108,7 +100,7 @@ export default function Newsletter() {
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-300 mt-auto print-link"
                   >
-                    🍽️ Commander 26€
+                    🍽️ Commander
                   </a>
                 </div>
               </div>

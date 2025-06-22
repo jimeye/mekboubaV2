@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Navbar from './components/Navbar';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import HeroSliderNew from './components/HeroSliderNew';
 
 const heroImages = [
   {
@@ -99,58 +100,7 @@ export default function HomeNew() {
 
       {/* Hero Section avec Images à la Suite */}
       <section id="hero" className="relative">
-        {heroImages.map((slide, index) => (
-          <div key={slide.id} className="relative h-screen">
-            <div className="relative w-full h-full">
-              <Image
-                src={slide.image}
-                alt={slide.title}
-                fill
-                className="object-cover"
-                priority={index === 0}
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-black/30" />
-              
-              {/* Contenu du slide avec logo intégré */}
-              <div className="absolute inset-0 flex flex-col items-center justify-start text-white z-10 p-4 pt-20 md:pt-0 md:justify-center">
-                {/* Logo */}
-                <div className="relative w-40 h-40 md:w-52 md:h-52 mb-4 mt-0 md:mt-0">
-                  <Image
-                    src="/images/logoile.png"
-                    alt="Logo Ile"
-                    fill
-                    className="object-contain"
-                    unoptimized
-                    priority
-                  />
-                </div>
-
-                {/* Texte */}
-                <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">{slide.title}</h1>
-                <p className="text-xl md:text-2xl text-center max-w-2xl px-4" dangerouslySetInnerHTML={{ __html: slide.description }}></p>
-                <a 
-                  href="#menu"
-                  className="mt-6 bg-accent-red hover:bg-accent-red/90 text-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300"
-                >
-                  Notre Menu
-                </a>
-                <p className="text-xl md:text-2xl text-white/90 mt-2 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
-                <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
-                <a 
-                  href="https://wa.me/33652696976?text=Envie de régaler vos papilles ? %0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm md:text-base text-white hover:text-accent-red text-[0.63em] mt-1 text-center block transition-all duration-300 hover:scale-110"
-                >
-                  Réservez votre plaisir dès maintenant
-                  <br />
-                  lancement officiel le 30/06 !
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
+        <HeroSliderNew />
       </section>
 
       {/* About Section */}
@@ -201,14 +151,14 @@ export default function HomeNew() {
 
       {/* Menu Section Amélioré */}
       <section id="menu" className="relative min-h-screen overflow-hidden bg-gray-50 py-20">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/une experience unique.jpg"
-            alt=""
-            fill
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/une experience unique.jpg"
+              alt=""
+              fill
             className="object-cover opacity-45"
-            unoptimized
-          />
+              unoptimized
+            />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -220,8 +170,8 @@ export default function HomeNew() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
-            {/* Sandwich Boulettes Mekbouba */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
+                {/* Sandwich Boulettes Mekbouba */}
             <div className="group relative">
               <div className="shadow-2xl overflow-hidden flex flex-col relative border-2 border-accent-red bg-white transform transition-all duration-500 hover:scale-105 hover:shadow-3xl h-[600px]">
                 <div className="relative h-64">
@@ -248,12 +198,10 @@ export default function HomeNew() {
                     </p>
                   </div>
                   <a 
-                    href="https://wa.me/33652696976?text=Envie de régaler vos papilles ?%0A%0ACommandez dès maintenant vos Sandwichs Boulettes Mekbouba ou nos délicieuses Box Boulettes Mekbouba !%0A%0AMerci de nous indiquer :%0A- Le nombre de sandwichs et/ou de box souhaité(s)%0A- Votre localisation sur l'île%0A- L'heure de livraison souhaitée%0A%0ALivraison 15 € — Offerte dès 6 produits commandés%0AOn s'occupe du reste, et promis, c'est une explosion de saveurs !"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/reservation"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
                   >
-                    🥪 Commander
+                    🥪 Réserver
                   </a>
                 </div>
               </div>
@@ -291,7 +239,7 @@ export default function HomeNew() {
                     rel="noopener noreferrer"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto"
                   >
-                    🍽️ Commander
+                    🍽️ Réserver
                   </a>
                 </div>
               </div>
@@ -309,7 +257,7 @@ export default function HomeNew() {
                     unoptimized
                   />
                   <div className="absolute top-4 right-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    🔜 Bientôt
+                    🔜 Coming Soon
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
@@ -371,15 +319,15 @@ export default function HomeNew() {
 
       {/* Contact Section */}
       <section id="contact" className="relative min-h-screen py-20">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/une experience unique.jpg"
-            alt=""
-            fill
-            className="object-cover"
-            unoptimized
-          />
-        </div>
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src="/images/une experience unique.jpg"
+                      alt=""
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
@@ -424,18 +372,18 @@ export default function HomeNew() {
                     </a>
                   </div>
                 </div>
-              </div>
-            </div>
-            
+                  </div>
+                </div>
+
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl h-[400px] flex flex-col">
               <h3 className="text-[2.3rem] font-bold text-white mb-6 text-center">Pré-commande obligatoire</h3>
               <div className="space-y-4 text-white flex-grow text-center">
                 <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
                   Lundi - Jeudi max 12h
-                </div>
+                  </div>
                 <div className="hover:text-accent-red transition-colors duration-300 text-[1.15rem]">
                   Kosher Friendly
-                </div>
+                  </div>
                 <div className="text-[1.15rem] mt-4 hover:text-accent-red transition-colors duration-300">
                   Cuisine certifiée 100% Judéo-Tunisienne,<br />
                   transmise de génération en génération.
@@ -453,10 +401,10 @@ export default function HomeNew() {
                 href="https://wa.me/33652696976?text=Bonjour ! Je souhaite commander vos délicieuses spécialités Mekbouba. Pouvez-vous me donner plus d'informations ?"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-[0.92rem]"
+                className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-auto text-[0.92rem]"
               >
                 <span className="text-[1.84rem]">💬</span>
-                <span>Commander sur WhatsApp</span>
+                <span>Réserver</span>
               </a>
             </div>
           </div>
@@ -464,24 +412,24 @@ export default function HomeNew() {
       </section>
 
       {/* Footer Amélioré */}
-      <footer className="bg-accent-red text-white py-12">
+      <footer className="bg-accent-red text-white py-6">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
+          <div className="grid grid-cols-1 gap-4">
+            <div className="text-center">
               <h3 className="text-xl font-bold mb-4">MEKBOUBA, BOULETTES & PIMENTS 🌶️</h3>
               <p className="text-sm text-gray-200 mb-4">
                 Cuisine certifiée 100% Judéo-Tunisienne,<br />
                 transmise de génération en génération.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 justify-center">
                 <div className="text-2xl">🌶️</div>
                 <div className="text-2xl">🥘</div>
                 <div className="text-2xl">👨‍🍳</div>
               </div>
             </div>
             
-            <div>
-              <h3 className="text-xl font-bold mb-4">Contact</h3>
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4">Prenez le micro 🎙️</h3>
               <div className="space-y-2 text-sm">
                 <a href="https://wa.me/33652696976" target="_blank" rel="noopener noreferrer" className="block hover:text-gray-200 transition-colors">
                   📞 +33 6 52 69 69 76
@@ -489,23 +437,24 @@ export default function HomeNew() {
                 <a href="mailto:contact@mekbouba.fr" className="block hover:text-gray-200 transition-colors">
                   📧 contact@mekbouba.fr
                 </a>
-                <div className="text-gray-200">
+                <a 
+                  href="https://maps.google.com/maps?q=38.96426,1.47936&z=15"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-gray-200 transition-colors"
+                  title="Ouvrir dans Google Maps"
+                >
                   🌍 Ibiza, Espagne
-                </div>
+                </a>
               </div>
             </div>
             
-            <div>
+            <div className="text-center">
               <h3 className="text-xl font-bold mb-4">Informations</h3>
               <div className="space-y-2 text-sm text-gray-200">
                 <div>📅 Pré-commande obligatoire</div>
                 <div>⏰ Lundi - Jeudi max 12h</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
-                <div className="mt-4">
-                  <a href="https://wa.me/33608251223?text=Je veux le meme site !!" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-gray-200 transition-colors">
-                    Website design by ©MEKBOUBA STUDIO
-                  </a>
-                </div>
               </div>
             </div>
           </div>
@@ -513,6 +462,11 @@ export default function HomeNew() {
           <div className="border-t border-white/20 mt-8 pt-8 text-center">
             <p className="text-sm text-gray-200">
               © 2025 MEKBOUBA, BOULETTES & PIMENTS 🌶️ - Tous droits réservés
+            </p>
+            <p className="text-xs text-gray-200 mt-2">
+              <a href="https://wa.me/33608251223?text=Je veux le meme site !!" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition-colors">
+                Website design by ©MEKBOUBA STUDIO
+              </a>
             </p>
           </div>
         </div>

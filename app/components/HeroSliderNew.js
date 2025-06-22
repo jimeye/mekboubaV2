@@ -35,6 +35,7 @@ export default function HeroSliderNew() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [isInSlider, setIsInSlider] = useState(true);
   const sliderRef = useRef(null);
 
   // Auto-play (optionnel, peut être désactivé)
@@ -44,6 +45,24 @@ export default function HeroSliderNew() {
     }, 8000); // 8 secondes par slide
 
     return () => clearInterval(timer);
+  }, []);
+
+  // Détecter si on est dans la zone du slider
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sliderRef.current) {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+          const aboutTop = aboutSection.offsetTop;
+          const scrollPosition = window.scrollY;
+          // Le logo disparaît quand on commence à voir la section "Notre Histoire"
+          setIsInSlider(scrollPosition < aboutTop - 100);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const nextSlide = () => {
@@ -86,47 +105,33 @@ export default function HeroSliderNew() {
   return (
     <div 
       ref={sliderRef}
-      className="relative h-screen overflow-hidden"
+      className="relative h-screen overflow-y-auto"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <div className="relative w-full h-screen">
-        {/* Logo fixe */}
-        <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden md:block">
-          <div className="relative w-32 h-32 md:w-52 md:h-52">
-            <Image
-              src="/images/logoile.png"
-              alt="Logo Ile"
-              fill
-              className="object-contain"
-              unoptimized
-              priority
-            />
+      <div className="relative w-full">
+        {/* Logo mobile - visible seulement dans le slider */}
+        {isInSlider && (
+          <div className="fixed top-[17%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 block landscape:hidden md:hidden">
+            <div className="relative w-32 h-32 md:w-52 md:h-52 scale-[1.46]">
+              <Image
+                src="/images/logo ile.png"
+                alt="Logo Ile"
+                fill
+                className="object-contain"
+                unoptimized
+                priority
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Logo mobile */}
-        <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 block landscape:hidden md:hidden">
-          <div className="relative w-32 h-32 md:w-52 md:h-52 scale-[1.46]">
-            <Image
-              src="/images/logoile.png"
-              alt="Logo Ile"
-              fill
-              className="object-contain"
-              unoptimized
-              priority
-            />
-          </div>
-        </div>
-
-        {/* Slides */}
+        {/* Slides en scroll vertical */}
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              currentSlide === index ? 'opacity-100' : 'opacity-0'
-            }`}
+            className="relative w-full h-screen"
           >
             <div className="relative w-full h-full">
               <Image
@@ -149,46 +154,35 @@ export default function HeroSliderNew() {
                 </a>
                 <p className="text-xl md:text-2xl text-white/90 mt-2 mb-1 text-[1.2em]">*Uniquement le vendredi</p>
                 <p className="text-base md:text-lg text-white/90 text-[0.63em] -mt-1">Pré-Commande Obligatoire</p>
+                
+                {/* Lien de réservation avec ID unique */}
+                <div className="mt-24 relative z-50">
+                  <Link 
+                    href="/reservation"
+                    id="reservation-link-slider"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm md:text-base text-white/80 hover:text-white transition-colors duration-300 cursor-pointer block text-center"
+                    style={{ pointerEvents: 'auto' }}
+                  >
+                    Réservez votre plaisir dès maintenant<br />
+                    lancement officiel le 30/06 !
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         ))}
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-          aria-label="Slide précédent"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-          aria-label="Slide suivant"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-
-        {/* Slide Counter */}
-        <div className="absolute top-4 left-4 z-30 bg-black/50 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm">
-          {currentSlide + 1} / {slides.length}
-        </div>
       </div>
       
       {/* Navigation Dots */}
-      <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-3">
+      <div className="fixed bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-1 md:space-x-2 z-30">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
+            className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/75'
             }`}
             aria-label={`Aller au slide ${index + 1}`}
           />
@@ -196,9 +190,9 @@ export default function HeroSliderNew() {
       </div>
 
       {/* Swipe Instructions (Mobile) */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30 text-white/70 text-sm bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm md:hidden">
+      {/* <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30 text-white/70 text-sm bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm md:hidden">
         ← Glissez pour naviguer →
-      </div>
+      </div> */}
     </div>
   );
 } 

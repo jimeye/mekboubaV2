@@ -11,14 +11,7 @@ export default function Footer() {
           {/* Logo et Description */}
           <div className="text-center md:text-left">
             <div className="mb-4">
-              <Image
-                src="/images/logo ile.png"
-                alt="Mekbouba Logo"
-                width={120}
-                height={120}
-                className="mx-auto md:mx-0"
-                unoptimized
-              />
+              <h3 className="text-xl font-semibold">MEKBOUBA, BOULETTES & PIMENTS 🌶️</h3>
             </div>
             <p className="text-gray-400">
               Une expérience culinaire unique à Ibiza, alliant saveurs tunisiennes authentiques et ambiance chaleureuse.
