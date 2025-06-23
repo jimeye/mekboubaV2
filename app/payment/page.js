@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Elements, CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 // Charger Stripe (remplacer par ta clé publique)
@@ -14,6 +14,28 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [paymentRequest, setPaymentRequest] = useState(null);
+  const [prButtonReady, setPrButtonReady] = useState(false);
+
+  useEffect(() => {
+    if (stripe) {
+      const pr = stripe.paymentRequest({
+        country: 'FR',
+        currency: 'eur',
+        total: {
+          label: 'Total',
+          amount: amount * 100,
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+      });
+      pr.canMakePayment().then(result => {
+        if (result) {
+          setPaymentRequest(pr);
+        }
+      });
+    }
+  }, [stripe, amount]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,6 +109,31 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             }
           </p>
         </div>
+
+        {/* Bouton Apple Pay / Google Pay */}
+        {paymentRequest && (
+          <div className="mb-4">
+            <PaymentRequestButtonElement
+              options={{
+                paymentRequest,
+                style: {
+                  paymentRequestButton: {
+                    type: 'default',
+                    theme: 'dark',
+                    height: '48px',
+                  },
+                },
+              }}
+              onReady={() => setPrButtonReady(true)}
+              onClick={event => {
+                // Optionnel : gestion d'événements
+              }}
+            />
+            {!prButtonReady && (
+              <div className="text-gray-500 text-sm mt-2">Chargement du bouton Apple Pay / Google Pay…</div>
+            )}
+          </div>
+        )}
 
         <div className="border border-gray-300 rounded-lg p-4 mb-4">
           <CardElement
