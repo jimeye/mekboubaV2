@@ -48,28 +48,28 @@ export default function CustomChat() {
             
             <div className="space-y-2">
               <button
-                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Je n'arrive pas à valider ma commande.")}
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais je n'arrive pas à finaliser ma commande. Pouvez-vous m'aider à aller au bout de la commande, s'il vous plaît ?")}
                 className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
               >
-                1️⃣ Je n'arrive pas à valider
+                1️⃣ Je n'arrive pas à finaliser
               </button>
               
               <button
-                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Je n'arrive pas à payer.")}
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais je n'arrive pas à payer. Pouvez-vous m'aider à valider mon paiement, s'il vous plaît ?")}
                 className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
               >
                 2️⃣ Je n'arrive pas à payer
               </button>
               
               <button
-                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Je n'arrive pas à me localiser.")}
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais je n'arrive pas à me localiser. Pouvez-vous m'aider à renseigner mon adresse, s'il vous plaît ?")}
                 className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
               >
                 3️⃣ Je n'arrive pas à me localiser
               </button>
               
               <button
-                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Autre problème.")}
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'ai un autre problème. Pouvez-vous m'aider, s'il vous plaît ?")}
                 className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
               >
                 4️⃣ Autre
