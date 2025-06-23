@@ -27,6 +27,9 @@ export default function ReservationPage() {
     notes: ''
   });
 
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [showPaymentOptions, setShowPaymentOptions] = useState(false);
+
   const router = useRouter();
 
   const prices = { sbm: 26, bbm: 26 };
@@ -42,25 +45,11 @@ export default function ReservationPage() {
     'Hôtel Six Senses Ibiza',
     'Hôtel Aguas de Ibiza Grand Luxe Hotel',
     'Hôtel Ibiza Corso Hotel & Spa',
-    'Hôtel Hotel Mirador de Dalt Vila',
-    'Hôtel Hotel Montesol Ibiza',
-    'Hôtel Hotel Cenit',
-    'Hôtel Hotel Ses Figueres',
-    'Hôtel Hotel Torre del Mar',
-    'Hôtel Hotel Montesol Ibiza',
-    'Hôtel Hotel Ibiza Gran Hotel',
-    'Hôtel Hotel Ushuaïa Ibiza Beach Hotel',
-    'Hôtel Hotel Hard Rock Hotel Ibiza',
-    'Hôtel Hotel ME Ibiza',
-    'Hôtel Hotel Nobu Hotel Ibiza Bay',
-    'Hôtel Hotel Six Senses Ibiza',
-    'Hôtel Hotel Aguas de Ibiza Grand Luxe Hotel',
-    'Hôtel Hotel Ibiza Corso Hotel & Spa',
-    'Hôtel Hotel Mirador de Dalt Vila',
-    'Hôtel Hotel Montesol Ibiza',
-    'Hôtel Hotel Cenit',
-    'Hôtel Hotel Ses Figueres',
-    'Hôtel Hotel Torre del Mar',
+    'Hôtel Mirador de Dalt Vila',
+    'Hôtel Cenit',
+    'Hôtel Ses Figueres',
+    'Hôtel Torre del Mar',
+    'Palladium Hotel Playa d\'en Bossa',
     'Autre hôtel'
   ];
 
@@ -193,74 +182,52 @@ export default function ReservationPage() {
     '14:30 à 15:00'
   ];
 
-  const handleSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     
-    // Extraire le jour et mois de la date de livraison sélectionnée
-    const deliveryDateParts = formData.deliveryDate.split(' ');
-    const day = deliveryDateParts[1]; // Le jour (ex: "11")
-    const month = deliveryDateParts[2]; // Le mois (ex: "juillet")
-    
-    // Convertir le mois en numéro
-    const monthNames = {
-      'janvier': '01', 'février': '02', 'mars': '03', 'avril': '04',
-      'mai': '05', 'juin': '06', 'juillet': '07', 'août': '08',
-      'septembre': '09', 'octobre': '10', 'novembre': '11', 'décembre': '12'
-    };
-    const monthNumber = monthNames[month.toLowerCase()];
-    
-    // Récupérer le compteur depuis localStorage ou démarrer à 55501
-    const lastOrderNumber = localStorage.getItem('lastOrderNumber') || '55500';
-    const currentCounter = parseInt(lastOrderNumber) + 1;
-    localStorage.setItem('lastOrderNumber', currentCounter.toString());
-    
-    const orderNumber = `CMD ${day}${monthNumber}-${currentCounter}`;
-    
-    const sbmDetails = formData.sbmItems.map((item, index) => 
-      `\n  SBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
-    ).join('');
-    const bbmDetails = formData.bbmItems.map((item, index) => 
-      `\n  BBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
-    ).join('');
-
-    // Construire l'adresse selon le type de livraison
-    let deliveryAddress = '';
-    if (formData.isHotel === 'yes') {
-      if (formData.selectedHotel === 'Autre hôtel') {
-        deliveryAddress = `Hôtel: ${formData.otherHotelName}\nAdresse: ${formData.otherHotelAddress}, ${formData.otherHotelPostalCode}, ${formData.otherHotelCity}, ${formData.otherHotelCountry}`;
-      } else {
-        deliveryAddress = `Hôtel: ${formData.selectedHotel}`;
-      }
-    } else {
-      deliveryAddress = `Adresse: ${formData.address}, ${formData.postalCode}, ${formData.city}, ${formData.country}`;
+    // Vérifier que tous les champs requis sont remplis
+    if (!formData.deliveryDate || !formData.deliveryTime || !formData.firstName || 
+        !formData.lastName || !formData.phone || !formData.isHotel) {
+      alert('Veuillez remplir tous les champs obligatoires.');
+      return;
     }
 
-    const message = `
-Commande ${orderNumber}
-Nouvelle Commande Mekbouba
------------------------------------
-Client :
-Nom: ${formData.lastName}
-Prénom: ${formData.firstName}
-Téléphone: ${formData.phone}
+    // Vérifier l'adresse selon le type de livraison
+    if (formData.isHotel === 'yes') {
+      if (!formData.selectedHotel) {
+        alert('Veuillez sélectionner un hôtel.');
+        return;
+      }
+      if (formData.selectedHotel === 'Autre hôtel' && !formData.otherHotelName) {
+        alert('Veuillez saisir le nom de votre hôtel.');
+        return;
+      }
+    } else {
+      if (!formData.address || !formData.postalCode || !formData.city) {
+        alert('Veuillez saisir votre adresse complète.');
+        return;
+      }
+    }
 
-Livraison :
-Date: ${formData.deliveryDate} à ${formData.deliveryTime}
-${deliveryAddress}
+    // Vérifier qu'il y a au moins un article
+    if (totalItems === 0) {
+      alert('Veuillez ajouter au moins un article à votre commande.');
+      return;
+    }
 
-Détails de la commande :
-SBM: ${formData.sbmItems.length} x ${prices.sbm}€${sbmDetails}
-BBM: ${formData.bbmItems.length} x ${prices.bbm}€${bbmDetails}
+    // Afficher les options de paiement
+    setShowPaymentOptions(true);
+  };
 
-Notes: ${formData.notes || 'Aucune'}
------------------------------------
-Calcul :
-Sous-total: ${subtotal}€
-Livraison: ${deliveryFee}€
-TOTAL À PAYER: ${total}€
-`;
-    const whatsappUrl = `https://wa.me/33652696976?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+  const handlePaymentSelection = (paymentType) => {
+    setPaymentMethod(paymentType);
+    
+    // Rediriger vers la page de paiement
+    const orderDataParam = encodeURIComponent(JSON.stringify(formData));
+    const amountParam = total;
+    
+    const paymentUrl = `/payment?orderData=${orderDataParam}&paymentType=${paymentType}&amount=${amountParam}`;
+    router.push(paymentUrl);
   };
 
   return (
@@ -281,7 +248,7 @@ TOTAL À PAYER: ${total}€
                 <p className="text-gray-600 mt-2">Livraison uniquement le vendredi</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleFormSubmit} className="space-y-8">
                 {/* Section Commande */}
                 <div>
                   <h2 className="text-xl font-semibold mb-4 text-gray-700">Votre commande</h2>
@@ -410,22 +377,9 @@ TOTAL À PAYER: ${total}€
                                 required
                               >
                                 <option value="" disabled>Sélectionnez un hôtel</option>
-                                <option value="Autre hôtel">Autre hôtel</option>
-                                <option value="Hôtel Montesol Ibiza">Hôtel Montesol Ibiza</option>
-                                <option value="Hôtel Montesol Ibiza Curio Collection by Hilton">Hôtel Montesol Ibiza Curio Collection by Hilton</option>
-                                <option value="Hôtel Ibiza Gran Hotel">Hôtel Ibiza Gran Hotel</option>
-                                <option value="Hôtel Ushuaïa Ibiza Beach Hotel">Hôtel Ushuaïa Ibiza Beach Hotel</option>
-                                <option value="Hôtel Hard Rock Hotel Ibiza">Hôtel Hard Rock Hotel Ibiza</option>
-                                <option value="Hôtel ME Ibiza">Hôtel ME Ibiza</option>
-                                <option value="Hôtel Nobu Hotel Ibiza Bay">Hôtel Nobu Hotel Ibiza Bay</option>
-                                <option value="Hôtel Six Senses Ibiza">Hôtel Six Senses Ibiza</option>
-                                <option value="Hôtel Aguas de Ibiza Grand Luxe Hotel">Hôtel Aguas de Ibiza Grand Luxe Hotel</option>
-                                <option value="Hôtel Ibiza Corso Hotel & Spa">Hôtel Ibiza Corso Hotel & Spa</option>
-                                <option value="Hôtel Mirador de Dalt Vila">Hôtel Mirador de Dalt Vila</option>
-                                <option value="Hôtel Cenit">Hôtel Cenit</option>
-                                <option value="Hôtel Ses Figueres">Hôtel Ses Figueres</option>
-                                <option value="Hôtel Torre del Mar">Hôtel Torre del Mar</option>
-                                <option value="Palladium Hotel Playa d'en Bossa">Palladium Hotel Playa d'en Bossa</option>
+                                {ibizaHotels.map(hotel => (
+                                  <option key={hotel} value={hotel}>{hotel}</option>
+                                ))}
                               </select>
                             </div>
                           )}
@@ -526,9 +480,46 @@ TOTAL À PAYER: ${total}€
                   <div className="flex justify-between text-lg"><span>Livraison</span><span>{deliveryFee}€</span></div>
                   {totalItems > 0 && totalItems < 6 && <p className="text-center text-sm text-gray-500">Livraison offerte pour 6 articles ou plus !</p>}
                   <div className="flex justify-between text-2xl font-bold"><span>TOTAL</span><span>{total}€</span></div>
-                  <button type="submit" disabled={totalItems === 0} className="w-full bg-accent-red text-white py-3 rounded-md font-bold text-lg disabled:bg-gray-400">
-                    🚀 Valider ma commande
-                  </button>
+                  
+                  {!showPaymentOptions ? (
+                    <button 
+                      type="submit" 
+                      disabled={totalItems === 0} 
+                      className="w-full bg-accent-red text-white py-3 rounded-md font-bold text-lg disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    >
+                      🚀 Continuer vers le paiement
+                    </button>
+                  ) : (
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-700 text-center">Choisissez votre mode de paiement</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button
+                          type="button"
+                          onClick={() => handlePaymentSelection('cash_validation')}
+                          className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-base"
+                        >
+                          <span>💰 Cash<br /><span className='text-xs font-normal'>Validation CB 0€ – paiement à la livraison</span></span>
+                        </button>
+                        
+                        <button
+                          type="button"
+                          onClick={() => handlePaymentSelection('full_payment')}
+                          className="inline-flex items-center justify-center space-x-2 bg-accent-red hover:bg-accent-red/90 text-white px-5 py-1.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-base"
+                        >
+                          <span>💳 Cb<br /><span className='text-xs font-normal'>Payez maintenant {total}€</span></span>
+                        </button>
+                      </div>
+                      
+                      <button
+                        type="button"
+                        onClick={() => setShowPaymentOptions(false)}
+                        className="w-full text-gray-500 hover:text-gray-700 underline text-sm"
+                      >
+                        ← Retour à la commande
+                      </button>
+                    </div>
+                  )}
                 </div>
               </form>
             </div>
