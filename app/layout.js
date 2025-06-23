@@ -12,8 +12,9 @@ const lilitaOne = Lilita_One({
 });
 
 export const metadata = {
-  title: 'Mekbouba Restaurant',
-  description: 'Restaurant tunisien authentique',
+  title: 'Mekbouba Food Truck Restaurant - Cuisine Kosher Cacher Ibiza | Boulettes & Piments',
+  description: 'Restaurant kosher friendly à Ibiza, cuisine judéo-tunisienne authentique. Boulettes, piments et spécialités cacher. Livraison le vendredi. Commandez en ligne.',
+  keywords: 'kosher ibiza, cacher ibiza, kosher friendly ibiza, cacher friendly ibiza, restaurant kosher friendly, cuisine juive ibiza, boulettes tunisiennes, piments, mekbouba, judéo-tunisien, livraison kosher friendly',
 };
  
 export default function RootLayout({ children }) {

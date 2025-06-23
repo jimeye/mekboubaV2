@@ -59,9 +59,10 @@ export default function HomeNew() {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 text-center lg:text-left">
-              <h3 className="text-3xl font-bold text-gray-800">Cuisine Judéo-Tunisienne Authentique</h3>
+              <h3 className="text-3xl font-bold text-gray-800">Cuisine Judéo-Tunisienne Authentique - Restaurant Kosher Ibiza</h3>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Découvrez l'authenticité de la cuisine judéo-tunisienne transmise de génération en génération. 
+                Restaurant cacher friendly à Ibiza, spécialisé dans les boulettes et piments traditionnels. 
                 Nos recettes traditionnelles, préparées avec des ingrédients frais et des épices sélectionnées, 
                 vous transportent directement dans les saveurs de Tunisie.
               </p>
@@ -400,6 +401,7 @@ export default function HomeNew() {
                 <div>⏰ Passez votre commande du Dimanche au Jeudi max 12h</div>
                 <div>Vous serez livrer vendredi !</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
+                <div>Kosher Friendly</div>
               </div>
             </div>
           </div>

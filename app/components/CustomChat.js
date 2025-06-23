@@ -4,45 +4,11 @@ import { useState } from 'react';
 
 export default function CustomChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "🍽️ Bonjour ! Bienvenue chez Mekbouba. Comment puis-je vous aider ?",
-      sender: 'bot',
-      timestamp: new Date()
-    }
-  ]);
-  const [inputMessage, setInputMessage] = useState('');
 
-  const handleSendMessage = () => {
-    if (inputMessage.trim()) {
-      const newMessage = {
-        id: messages.length + 1,
-        text: inputMessage,
-        sender: 'user',
-        timestamp: new Date()
-      };
-      
-      setMessages([...messages, newMessage]);
-      setInputMessage('');
-      
-      // Simuler une réponse automatique
-      setTimeout(() => {
-        const botResponse = {
-          id: messages.length + 2,
-          text: "Merci pour votre message ! Notre équipe vous répondra rapidement. En attendant, vous pouvez commander directement via WhatsApp en cliquant sur les boutons 'Commander' de notre menu.",
-          sender: 'bot',
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, botResponse]);
-      }, 1000);
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSendMessage();
-    }
+  const handleQuickMessage = (message) => {
+    const whatsappUrl = `https://wa.me/33652696976?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    setIsOpen(false);
   };
 
   return (
@@ -70,50 +36,43 @@ export default function CustomChat() {
           {/* En-tête */}
           <div className="bg-accent-red text-white p-4 rounded-t-lg">
             <h3 className="font-bold text-lg">💬 Support Mekbouba</h3>
-            <p className="text-sm opacity-90">En ligne • Réponse rapide</p>
+            <p className="text-sm opacity-90">Chat WhatsApp • Réponse rapide</p>
           </div>
 
-          {/* Messages */}
+          {/* Messages rapides */}
           <div className="flex-1 p-4 overflow-y-auto space-y-3">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-xs px-3 py-2 rounded-lg ${
-                    message.sender === 'user'
-                      ? 'bg-accent-red text-white'
-                      : 'bg-gray-100 text-gray-800'
-                  }`}
-                >
-                  <p className="text-sm">{message.text}</p>
-                  <p className="text-xs opacity-70 mt-1">
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Zone de saisie */}
-          <div className="p-4 border-t border-gray-200">
-            <div className="flex space-x-2">
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Tapez votre message..."
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-red focus:border-transparent"
-              />
+            <div className="text-center text-gray-600 text-sm mb-4">
+              <p className="mb-2">❓ <strong>Problème pour commander ?</strong></p>
+              <p className="text-xs">Sélectionnez votre problème :</p>
+            </div>
+            
+            <div className="space-y-2">
               <button
-                onClick={handleSendMessage}
-                className="bg-accent-red hover:bg-accent-red/90 text-white px-4 py-2 rounded-lg transition-colors duration-300"
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Je n'arrive pas à valider ma commande.")}
+                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+                1️⃣ Je n'arrive pas à valider
+              </button>
+              
+              <button
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Je n'arrive pas à payer.")}
+                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
+              >
+                2️⃣ Je n'arrive pas à payer
+              </button>
+              
+              <button
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Je n'arrive pas à me localiser.")}
+                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
+              >
+                3️⃣ Je n'arrive pas à me localiser
+              </button>
+              
+              <button
+                onClick={() => handleQuickMessage("Bonjour, j'aimerais passer une commande chez Mekbouba, mais j'aurais besoin d'un peu d'aide pour la finaliser. Pouvez-vous m'accompagner dans les étapes pour commander, s'il vous plaît ? Autre problème.")}
+                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-sm"
+              >
+                4️⃣ Autre
               </button>
             </div>
           </div>

@@ -187,11 +187,10 @@ export default function ReservationPage() {
   const availableFridays = getAvailableFridays();
 
   const availableTimes = [
-    '12:30',
-    '13:00', 
-    '13:30',
-    '14:00',
-    '14:30'
+    '12:30 à 13:00',
+    '13:00 à 13:30', 
+    '13:30 à 14:30',
+    '14:30 à 15:00'
   ];
 
   const handleSubmit = (e) => {
@@ -579,8 +578,9 @@ TOTAL À PAYER: ${total}€
               <h3 className="text-xl font-bold mb-4">Informations</h3>
               <div className="space-y-2 text-sm text-gray-200">
                 <div>📅 Pré-commande obligatoire</div>
-                <div>⏰ Passez votre commande du Dimanche au Jeudi max 12h</div>
+                <div>⏰ Dimanche - Jeudi max 12h</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
+                <div>Kosher Friendly</div>
               </div>
             </div>
           </div>
