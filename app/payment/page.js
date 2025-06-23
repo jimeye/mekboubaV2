@@ -156,7 +156,13 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
-            {error}
+            {(error === 'Your card was declined.' || error.toLowerCase().includes('refus')) ? (
+              orderData?.firstName
+                ? `Désolé ${orderData.firstName}, le paiement a été refusé. Merci de vérifier votre carte ou d'essayer un autre moyen de paiement.`
+                : 'Désolé, le paiement a été refusé. Merci de vérifier votre carte ou d'essayer un autre moyen de paiement.'
+            ) : (
+              error
+            )}
           </div>
         )}
 
