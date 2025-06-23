@@ -364,7 +364,7 @@ export default function HomeNew() {
               <h3 className="text-xl font-bold mb-4">MEKBOUBA, BOULETTES & PIMENTS 🌶️</h3>
               <p className="text-sm text-gray-200 mb-4">
                 Cuisine certifiée 100% Judéo-Tunisienne,<br />
-                transmise de génération en génération.
+                transmise de génération en génération. Kosher Friendly.
               </p>
               <div className="flex space-x-4 justify-center">
                 <div className="text-2xl">🌶️</div>

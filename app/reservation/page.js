@@ -544,7 +544,7 @@ TOTAL À PAYER: ${total}€
               <h3 className="text-xl font-bold mb-4">MEKBOUBA, BOULETTES & PIMENTS 🌶️</h3>
               <p className="text-sm text-gray-200 mb-4">
                 Cuisine certifiée 100% Judéo-Tunisienne,<br />
-                transmise de génération en génération.
+                transmise de génération en génération. Kosher Friendly.
               </p>
               <div className="flex space-x-4 justify-center">
                 <div className="text-2xl">🌶️</div>
@@ -578,7 +578,8 @@ TOTAL À PAYER: ${total}€
               <h3 className="text-xl font-bold mb-4">Informations</h3>
               <div className="space-y-2 text-sm text-gray-200">
                 <div>📅 Pré-commande obligatoire</div>
-                <div>⏰ Dimanche - Jeudi max 12h</div>
+                <div>⏰ Passez votre commande du Dimanche au Jeudi max 12h</div>
+                <div>Vous serez livrer vendredi !</div>
                 <div>🌶️ Cuisine 100% Judéo-Tunisienne</div>
                 <div>Kosher Friendly</div>
               </div>
