@@ -257,8 +257,11 @@ export default function ReservationPage() {
                   {/* SBM */}
                   <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <div className="flex justify-between items-center">
-                          <h3 className="font-semibold text-lg">🥪 Sandwich Boulettes SBM 26 €</h3>
-                          <button type="button" onClick={() => addItem('sbm')} className="bg-accent-red text-white px-1 md:px-2 py-0.5 md:py-1 rounded-lg font-semibold text-xs md:text-sm">+ Ajouter</button>
+                          <div>
+                            <h3 className="font-semibold text-lg leading-tight">🥪 Sandwich Boulettes</h3>
+                            <div className="font-semibold text-lg leading-tight">SBM 26 €</div>
+                          </div>
+                          <button type="button" onClick={() => addItem('sbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm">+</button>
                       </div>
                       {formData.sbmItems.map((item, index) => (
                           <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
@@ -292,8 +295,11 @@ export default function ReservationPage() {
                   {/* BBM */}
                   <div className="bg-gray-50 p-4 rounded-lg">
                       <div className="flex justify-between items-center">
-                          <h3 className="font-semibold text-lg">🍴 Box Boulettes BBM 26 €</h3>
-                          <button type="button" onClick={() => addItem('bbm')} className="bg-accent-red text-white px-1 md:px-2 py-0.5 md:py-1 rounded-lg font-semibold text-xs md:text-sm">+ Ajouter</button>
+                          <div>
+                            <h3 className="font-semibold text-lg leading-tight">🍴 Box Boulettes</h3>
+                            <div className="font-semibold text-lg leading-tight">BBM 26 €</div>
+                          </div>
+                          <button type="button" onClick={() => addItem('bbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm">+</button>
                       </div>
                       {formData.bbmItems.map((item, index) => (
                           <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
