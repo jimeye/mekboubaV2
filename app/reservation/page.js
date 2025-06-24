@@ -22,9 +22,13 @@ export default function ReservationPage() {
     city: '',
     country: 'Espagne',
     phone: '',
-    sbmItems: [],
-    bbmItems: [],
-    notes: ''
+    notes: '',
+    sbmQty: 0,
+    bbmQty: 0,
+    sbmOptions: { piment: true, oeuf: true, mekbouba: true },
+    bbmOptions: { piment: true, oeuf: true, mekbouba: true },
+    sbmBoulettesSupp: 0,
+    bbmBoulettesSupp: 0
   });
 
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -53,10 +57,8 @@ export default function ReservationPage() {
     'Autre hôtel'
   ];
 
-  const boulettesSuppTotal = formData.sbmItems.reduce((sum, item) => sum + (item.boulettesSupp || 0), 0) + formData.bbmItems.reduce((sum, item) => sum + (item.boulettesSupp || 0), 0);
-  const boulettesSuppPrice = boulettesSuppTotal * 5;
-  const subtotal = formData.sbmItems.length * prices.sbm + formData.bbmItems.length * prices.bbm + boulettesSuppPrice;
-  const totalItems = formData.sbmItems.length + formData.bbmItems.length;
+  const subtotal = formData.sbmQty * prices.sbm + formData.bbmQty * prices.bbm + (formData.sbmBoulettesSupp + formData.bbmBoulettesSupp) * 5;
+  const totalItems = formData.sbmQty + formData.bbmQty;
   const deliveryFee = totalItems >= 6 ? 0 : 15;
   const total = subtotal + deliveryFee;
 
@@ -135,55 +137,6 @@ export default function ReservationPage() {
     }
   };
 
-  const addItem = (itemType) => {
-    const newItem = { id: Date.now(), piment: true, mekbouba: true, oeuf: true, boulettes: true, boulettesSupp: 0 };
-    setFormData(prev => ({
-      ...prev,
-      [`${itemType}Items`]: [...prev[`${itemType}Items`], newItem]
-    }));
-  };
-
-  const removeItem = (itemType, itemId) => {
-    setFormData(prev => ({
-      ...prev,
-      [`${itemType}Items`]: prev[`${itemType}Items`].filter(item => item.id !== itemId)
-    }));
-  };
-
-  const updateItem = (itemType, itemId, field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      [`${itemType}Items`]: prev[`${itemType}Items`].map(item =>
-        item.id === itemId ? { ...item, [field]: value } : item
-      )
-    }));
-  };
-  
-  const getAvailableFridays = () => {
-    const fridays = [];
-    const currentYear = 2025;
-    
-    // Générer tous les vendredis de juillet 2025
-    for (let month = 6; month <= 7; month++) { // 6 = juillet, 7 = août
-      const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(currentYear, month, day);
-        if (date.getDay() === 5) { // 5 = vendredi
-          fridays.push(date);
-        }
-      }
-    }
-    return fridays.sort((a, b) => a - b);
-  };
-  const availableFridays = getAvailableFridays();
-
-  const availableTimes = [
-    '12:30 à 13:00',
-    '13:00 à 13:30', 
-    '13:30 à 14:30',
-    '14:30 à 15:00'
-  ];
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     
@@ -232,6 +185,22 @@ export default function ReservationPage() {
     router.push(paymentUrl);
   };
 
+  const getAvailableFridays = () => {
+    const fridays = [];
+    const currentYear = 2025;
+    for (let month = 6; month <= 7; month++) { // 6 = juillet, 7 = août
+      const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
+      for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(currentYear, month, day);
+        if (date.getDay() === 5) { // 5 = vendredi
+          fridays.push(date);
+        }
+      }
+    }
+    return fridays.sort((a, b) => a - b);
+  };
+  const availableFridays = getAvailableFridays();
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <main className="flex-grow">
@@ -256,73 +225,79 @@ export default function ReservationPage() {
                   <h2 className="text-xl font-semibold mb-4 text-gray-700">Votre commande</h2>
                   {/* SBM */}
                   <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                      <div className="flex flex-col md:flex-row md:items-center">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between">
+                      <div>
                         <span className="font-semibold text-lg leading-tight">Sandwich Boulettes</span>
                         <span className="font-semibold text-lg leading-tight md:ml-2">SBM 26 € 🥪</span>
                       </div>
-                      {formData.sbmItems.map((item, index) => (
-                          <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
-                              <div className="flex justify-between items-center mb-0.5">
-                                <p className="font-medium text-xs">SBM #{index + 1}</p>
-                                <button type="button" onClick={() => removeItem('sbm', item.id)} className="text-red-500 font-bold text-xs">✕</button>
-                              </div>
-                              <div className="flex space-x-3">
-                                  <label className="flex items-center text-xs"><input type="checkbox" checked={item.piment} onChange={e => updateItem('sbm', item.id, 'piment', e.target.checked)} className="mr-1"/>🌶️ Piment</label>
-                                  <label className="flex items-center text-xs"><input type="checkbox" checked={item.oeuf} onChange={e => updateItem('sbm', item.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
-                                  <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('sbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
-                              </div>
-                              <div className="flex items-center mt-2 space-x-2">
-                                <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
-                                <select
-                                  className="border rounded px-0 py-0 text-[10px] w-8 h-4"
-                                  value={item.boulettesSupp || 0}
-                                  onChange={e => updateItem('sbm', item.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
-                                >
-                                  {[...Array(11).keys()].map(n => (
-                                    <option key={n} value={n}>{n}</option>
-                                  ))}
-                                </select>
-                              </div>
-                              <div className="text-xs text-gray-600 italic mt-1">
-                                bon le kiffe c'est de ne rien enlever ! au pire le piment 🌶️ ! As you like
-                              </div>
-                          </div>
-                      ))}
+                      <div className="flex items-center space-x-2 mt-2 md:mt-0">
+                        <label className="text-xs font-medium">Quantité :</label>
+                        <select
+                          className="border rounded px-1 py-0.5 text-xs w-12"
+                          value={formData.sbmQty}
+                          onChange={e => setFormData(prev => ({ ...prev, sbmQty: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
+                        >
+                          {[...Array(11).keys()].map(n => (
+                            <option key={n} value={n}>{n}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex space-x-3 mt-2">
+                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.sbmOptions.piment} onChange={e => setFormData(prev => ({ ...prev, sbmOptions: { ...prev.sbmOptions, piment: e.target.checked } }))} className="mr-1"/>🌶️ Piment</label>
+                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.sbmOptions.oeuf} onChange={e => setFormData(prev => ({ ...prev, sbmOptions: { ...prev.sbmOptions, oeuf: e.target.checked } }))} className="mr-1"/>🥚 Oeuf</label>
+                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.sbmOptions.mekbouba} onChange={e => setFormData(prev => ({ ...prev, sbmOptions: { ...prev.sbmOptions, mekbouba: e.target.checked } }))} className="mr-1"/>🥘 Mekbouba</label>
+                    </div>
+                    <div className="flex items-center mt-2 space-x-2">
+                      <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
+                      <select
+                        className="border rounded px-0 py-0 text-[10px] w-8 h-4"
+                        value={formData.sbmBoulettesSupp}
+                        onChange={e => setFormData(prev => ({ ...prev, sbmBoulettesSupp: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
+                      >
+                        {[...Array(11).keys()].map(n => (
+                          <option key={n} value={n}>{n}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   {/* BBM */}
                   <div className="bg-gray-50 p-4 rounded-lg">
-                      <div className="flex flex-col md:flex-row md:items-center">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between">
+                      <div>
                         <span className="font-semibold text-lg leading-tight">Box Boulettes</span>
                         <span className="font-semibold text-lg leading-tight md:ml-2">BBM 26 €🍴</span>
                       </div>
-                      {formData.bbmItems.map((item, index) => (
-                          <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
-                              <div className="flex justify-between items-center mb-0.5">
-                                <p className="font-medium text-xs">BBM #{index + 1}</p>
-                                <button type="button" onClick={() => removeItem('bbm', item.id)} className="text-red-500 font-bold text-xs">✕</button>
-                              </div>
-                              <div className="flex space-x-3">
-                                <label className="flex items-center text-xs"><input type="checkbox" checked={item.piment} onChange={e => updateItem('bbm', item.id, 'piment', e.target.checked)} className="mr-1"/>🌶️ Piment</label>
-                                <label className="flex items-center text-xs"><input type="checkbox" checked={item.oeuf} onChange={e => updateItem('bbm', item.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
-                                <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('bbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
-                              </div>
-                              <div className="flex items-center mt-2 space-x-2">
-                                <label className="text-xs font-medium">🥘 Boulettes SUP 5 €</label>
-                                <select
-                                  className="border rounded px-0 py-0 text-[10px] w-8 h-4"
-                                  value={item.boulettesSupp || 0}
-                                  onChange={e => updateItem('bbm', item.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
-                                >
-                                  {[...Array(11).keys()].map(n => (
-                                    <option key={n} value={n}>{n}</option>
-                                  ))}
-                                </select>
-                              </div>
-                              <div className="text-xs text-gray-600 italic mt-1">
-                                bon le kiffe c'est de ne rien enlever ! au pire le piment 🌶️ ! As you like
-                              </div>
-                          </div>
-                      ))}
+                      <div className="flex items-center space-x-2 mt-2 md:mt-0">
+                        <label className="text-xs font-medium">Quantité :</label>
+                        <select
+                          className="border rounded px-1 py-0.5 text-xs w-12"
+                          value={formData.bbmQty}
+                          onChange={e => setFormData(prev => ({ ...prev, bbmQty: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
+                        >
+                          {[...Array(11).keys()].map(n => (
+                            <option key={n} value={n}>{n}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex space-x-3 mt-2">
+                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.bbmOptions.piment} onChange={e => setFormData(prev => ({ ...prev, bbmOptions: { ...prev.bbmOptions, piment: e.target.checked } }))} className="mr-1"/>🌶️ Piment</label>
+                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.bbmOptions.oeuf} onChange={e => setFormData(prev => ({ ...prev, bbmOptions: { ...prev.bbmOptions, oeuf: e.target.checked } }))} className="mr-1"/>🥚 Oeuf</label>
+                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.bbmOptions.mekbouba} onChange={e => setFormData(prev => ({ ...prev, bbmOptions: { ...prev.bbmOptions, mekbouba: e.target.checked } }))} className="mr-1"/>🥘 Mekbouba</label>
+                    </div>
+                    <div className="flex items-center mt-2 space-x-2">
+                      <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
+                      <select
+                        className="border rounded px-0 py-0 text-[10px] w-8 h-4"
+                        value={formData.bbmBoulettesSupp}
+                        onChange={e => setFormData(prev => ({ ...prev, bbmBoulettesSupp: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
+                      >
+                        {[...Array(11).keys()].map(n => (
+                          <option key={n} value={n}>{n}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   <div className="mt-6">
                     <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Notes (allergies, etc.)</label>
