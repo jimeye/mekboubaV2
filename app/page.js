@@ -47,13 +47,35 @@ export default function HomeNew() {
 
   // S'assurer que la page se positionne en haut lors du rafraîchissement
   useEffect(() => {
-    // Scroll vers le haut de la page
+    // Méthode 1: Scroll vers le haut immédiatement
     window.scrollTo(0, 0);
     
-    // Empêcher le scroll automatique vers les ancres
+    // Méthode 2: Supprimer les ancres dans l'URL
     if (window.location.hash) {
       window.location.hash = '';
     }
+    
+    // Méthode 3: Forcer le scroll après un délai (pour mobile)
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }, 100);
+    
+    // Méthode 4: Empêcher le scroll automatique du navigateur
+    const preventScroll = (e) => {
+      e.preventDefault();
+      window.scrollTo(0, 0);
+    };
+    
+    // Ajouter l'écouteur temporairement
+    window.addEventListener('scroll', preventScroll, { passive: false });
+    
+    // Retirer l'écouteur après 500ms
+    setTimeout(() => {
+      window.removeEventListener('scroll', preventScroll);
+    }, 500);
+    
   }, []);
 
   const handleSliderScroll = (isScrolledOnSlider) => {
