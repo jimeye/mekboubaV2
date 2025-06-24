@@ -2,97 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
+import { Elements, CardElement, useStripe, useElements, PaymentRequestButtonElement, PaymentElement } from '@stripe/react-stripe-js';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 // Charger Stripe (remplacer par ta clé publique)
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_...');
 
-const PaymentForm = ({ orderData, paymentType, amount }) => {
+const PaymentForm = ({ orderData, paymentType, amount, clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [paymentRequest, setPaymentRequest] = useState(null);
-  const [prButtonReady, setPrButtonReady] = useState(false);
   const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    if (stripe) {
-      const pr = stripe.paymentRequest({
-        country: 'FR',
-        currency: 'eur',
-        total: {
-          label: 'Total',
-          amount: amount * 100,
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-      });
-
-      // Gérer les événements Apple Pay
-      pr.on('paymentmethod', async (event) => {
-        setLoading(true);
-        setError(null);
-
-        try {
-          // Créer l'intention de paiement
-          const response = await fetch('/api/create-payment-intent', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              amount: amount * 100,
-              paymentType,
-              orderData
-            }),
-          });
-
-          const { clientSecret, error: apiError } = await response.json();
-
-          if (apiError) {
-            throw new Error(apiError);
-          }
-
-          // Confirmer le paiement Apple Pay
-          const { error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: event.paymentMethod.id,
-          });
-
-          if (confirmError) {
-            event.complete('fail');
-            setError(confirmError.message);
-          } else {
-            event.complete('success');
-            setSuccess(true);
-            // Succès - rediriger vers confirmation
-            const successUrl = paymentType === 'cash_validation' 
-              ? `/payment-success?type=cash&orderData=${encodeURIComponent(JSON.stringify(orderData))}`
-              : `/payment-success?type=full&orderData=${encodeURIComponent(JSON.stringify(orderData))}`;
-            
-            router.push(successUrl);
-          }
-        } catch (err) {
-          event.complete('fail');
-          setError(err.message);
-        } finally {
-          setLoading(false);
-        }
-      });
-
-      pr.on('cancel', () => {
-        setError('Paiement annulé');
-      });
-
-      pr.canMakePayment().then(result => {
-        if (result) {
-          setPaymentRequest(pr);
-        }
-      });
-    }
-  }, [stripe, amount, paymentType, orderData, router]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -105,40 +27,19 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
     }
 
     try {
-      // Créer l'intention de paiement
-      const response = await fetch('/api/create-payment-intent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: amount * 100, // Convertir en centimes
-          paymentType,
-          orderData
-        }),
-      });
-
-      const { clientSecret, error: apiError } = await response.json();
-
-      if (apiError) {
-        throw new Error(apiError);
-      }
-
-      // Confirmer le paiement
-      const { error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        }
+      const { error: confirmError } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {},
+        redirect: 'if_required',
       });
 
       if (confirmError) {
         setError(confirmError.message);
       } else {
-        // Succès - rediriger vers confirmation
+        setSuccess(true);
         const successUrl = paymentType === 'cash_validation' 
           ? `/payment-success?type=cash&orderData=${encodeURIComponent(JSON.stringify(orderData))}`
           : `/payment-success?type=full&orderData=${encodeURIComponent(JSON.stringify(orderData))}`;
-        
         router.push(successUrl);
       }
     } catch (err) {
@@ -157,7 +58,6 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             : '💳 Paiement complet'
           }
         </h3>
-        
         <div className="mb-4">
           <p className="text-gray-600 mb-2">
             {paymentType === 'cash_validation' 
@@ -166,88 +66,17 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             }
           </p>
         </div>
-
-        {/* Bouton Apple Pay / Google Pay */}
-        {paymentRequest && (
-          <div className="mb-6">
-            <div className="text-center mb-3">
-              <p className="text-sm text-gray-600 mb-2">
-                💳 Paiement rapide et sécurisé
-              </p>
-            </div>
-            <PaymentRequestButtonElement
-              options={{
-                paymentRequest,
-                style: {
-                  paymentRequestButton: {
-                    type: 'default',
-                    theme: 'dark',
-                    height: '48px',
-                  },
-                },
-              }}
-              onReady={() => setPrButtonReady(true)}
-              onClick={event => {
-                // Optionnel : gestion d'événements
-              }}
-            />
-            {!prButtonReady && (
-              <div className="text-gray-500 text-sm mt-2 text-center">Chargement du bouton Apple Pay / Google Pay…</div>
-            )}
-            <div className="text-center mt-3">
-              <p className="text-xs text-gray-500">
-                {paymentType === 'cash_validation' 
-                  ? 'Validation gratuite pour confirmer votre commande'
-                  : `Paiement sécurisé de ${amount}€`
-                }
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Séparateur si Apple Pay est disponible */}
-        {paymentRequest && (
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">ou</span>
-            </div>
-          </div>
-        )}
-
-        <div className="border border-gray-300 rounded-lg p-4 mb-4">
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: '16px',
-                  color: '#424770',
-                  '::placeholder': {
-                    color: '#aab7c4',
-                  },
-                },
-                invalid: {
-                  color: '#9e2146',
-                },
-              },
-            }}
-          />
-        </div>
-
+        <PaymentElement />
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
             {error}
           </div>
         )}
-
         {success && (
           <div className="text-green-600 font-bold text-center my-4">
             Paiement validé ! Merci pour votre commande.
           </div>
         )}
-
         <button
           type="submit"
           disabled={!stripe || loading}
@@ -269,11 +98,13 @@ export default function PaymentPage() {
   const [orderData, setOrderData] = useState(null);
   const [paymentType, setPaymentType] = useState(null);
   const [amount, setAmount] = useState(0);
+  const [clientSecret, setClientSecret] = useState(null);
 
   useEffect(() => {
     const orderDataParam = searchParams.get('orderData');
     const paymentTypeParam = searchParams.get('paymentType');
     const amountParam = searchParams.get('amount');
+    const clientSecretParam = searchParams.get('clientSecret');
 
     if (orderDataParam) {
       setOrderData(JSON.parse(decodeURIComponent(orderDataParam)));
@@ -283,6 +114,9 @@ export default function PaymentPage() {
     }
     if (amountParam) {
       setAmount(parseInt(amountParam));
+    }
+    if (clientSecretParam) {
+      setClientSecret(clientSecretParam);
     }
   }, [searchParams]);
 
@@ -318,6 +152,7 @@ export default function PaymentPage() {
               orderData={orderData} 
               paymentType={paymentType} 
               amount={amount}
+              clientSecret={clientSecret}
             />
           </Elements>
 
