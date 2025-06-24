@@ -9,16 +9,20 @@ export async function POST(request) {
 
     let paymentIntent;
 
-    if (paymentType === 'cash_validation') {
-      // Validation 0€ pour paiement cash
-      const { sbmItems, bbmItems, notes, ...otherData } = orderData;
-      const simplifiedOrderData = {
-        ...otherData,
-        sbmItemsCount: sbmItems.length,
-        bbmItemsCount: bbmItems.length,
-        notes: notes.substring(0, 100) // Tronquer les notes pour être sûr
-      };
+    // On extrait uniquement les champs essentiels pour le metadata Stripe
+    const { deliveryDate, deliveryTime, firstName, lastName, phone, notes, sbmItems, bbmItems } = orderData;
+    const simplifiedOrderData = {
+      deliveryDate,
+      deliveryTime,
+      firstName,
+      lastName,
+      phone,
+      sbmItemsCount: sbmItems && Array.isArray(sbmItems) ? sbmItems.length : 0,
+      bbmItemsCount: bbmItems && Array.isArray(bbmItems) ? bbmItems.length : 0,
+      notes: notes ? notes.substring(0, 100) : ''
+    };
 
+    if (paymentType === 'cash_validation') {
       paymentIntent = await stripe.paymentIntents.create({
         amount: 0, // 0€ pour validation
         currency: 'eur',
@@ -29,15 +33,6 @@ export async function POST(request) {
         }
       });
     } else {
-      // Paiement complet
-      const { sbmItems, bbmItems, notes, ...otherData } = orderData;
-      const simplifiedOrderData = {
-        ...otherData,
-        sbmItemsCount: sbmItems.length,
-        bbmItemsCount: bbmItems.length,
-        notes: notes.substring(0, 100)
-      };
-
       paymentIntent = await stripe.paymentIntents.create({
         amount: amount, // Montant en centimes (2600 = 26€)
         currency: 'eur',

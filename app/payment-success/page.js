@@ -54,13 +54,17 @@ export default function PaymentSuccessPage() {
     
     const orderNumber = `CMD ${day}${monthNumber}-${currentCounter}`;
 
-    const sbmDetails = sbmItems.map((item, index) => 
-      `\n  SBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
-    ).join('');
+    const sbmDetails = Array.isArray(sbmItems)
+      ? sbmItems.map((item, index) => 
+          `\n  SBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
+        ).join('')
+      : '';
     
-    const bbmDetails = bbmItems.map((item, index) => 
-      `\n  BBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
-    ).join('');
+    const bbmDetails = Array.isArray(bbmItems)
+      ? bbmItems.map((item, index) => 
+          `\n  BBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
+        ).join('')
+      : '';
 
     // Construire l'adresse selon le type de livraison
     let deliveryAddress = '';
@@ -74,8 +78,10 @@ export default function PaymentSuccessPage() {
       deliveryAddress = `Adresse: ${address}, ${postalCode}, ${city}, ${country}`;
     }
 
-    const subtotal = sbmItems.length * 26 + bbmItems.length * 26;
-    const totalItems = sbmItems.length + bbmItems.length;
+    const sbmCount = Array.isArray(sbmItems) ? sbmItems.length : 0;
+    const bbmCount = Array.isArray(bbmItems) ? bbmItems.length : 0;
+    const subtotal = sbmCount * 26 + bbmCount * 26;
+    const totalItems = sbmCount + bbmCount;
     const deliveryFee = totalItems >= 6 ? 0 : 15;
     const total = subtotal + deliveryFee;
 
@@ -97,8 +103,8 @@ Date: ${deliveryDate} à ${deliveryTime}
 ${deliveryAddress}
 
 Détails de la commande :
-SBM: ${sbmItems.length} x 26€${sbmDetails}
-BBM: ${bbmItems.length} x 26€${bbmDetails}
+SBM: ${sbmCount} x 26€${sbmDetails}
+BBM: ${bbmCount} x 26€${bbmDetails}
 
 Notes: ${notes || 'Aucune'}
 -----------------------------------
