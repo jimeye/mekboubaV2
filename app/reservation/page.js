@@ -272,7 +272,7 @@ export default function ReservationPage() {
                         <span className="font-semibold text-lg leading-tight">Sandwich Boulettes</span>
                         <span className="font-semibold text-lg leading-tight md:ml-2">SBM 26 € 🥪</span>
                       </div>
-                      <button type="button" onClick={() => addLot('sbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm mt-2 md:mt-0">+ Ajouter un lot</button>
+                      <button type="button" onClick={() => addLot('sbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm mt-2 md:mt-0">+</button>
                     </div>
                     {formData.sbmLots.map((lot, idx) => (
                       <div key={lot.id} className="mt-2 ml-4 p-2 border-l-4 border-accent-red bg-white rounded-r-lg">
@@ -319,7 +319,7 @@ export default function ReservationPage() {
                         <span className="font-semibold text-lg leading-tight">Box Boulettes</span>
                         <span className="font-semibold text-lg leading-tight md:ml-2">BBM 26 €🍴</span>
                       </div>
-                      <button type="button" onClick={() => addLot('bbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm mt-2 md:mt-0">+ Ajouter un lot</button>
+                      <button type="button" onClick={() => addLot('bbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm mt-2 md:mt-0">+</button>
                     </div>
                     {formData.bbmLots.map((lot, idx) => (
                       <div key={lot.id} className="mt-2 ml-4 p-2 border-l-4 border-accent-red bg-white rounded-r-lg">
