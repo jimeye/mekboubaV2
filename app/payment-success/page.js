@@ -33,7 +33,7 @@ export default function PaymentSuccessPage() {
   const sendWhatsAppMessage = () => {
     if (!orderData) return;
 
-    const { deliveryDate, deliveryTime, firstName, lastName, phone, sbmItems, bbmItems, notes, isHotel, selectedHotel, otherHotelName, otherHotelAddress, otherHotelPostalCode, otherHotelCity, otherHotelCountry, address, postalCode, city, country } = orderData;
+    const { deliveryDate, deliveryTime, firstName, lastName, phone, sbmLots, bbmLots, notes, isHotel, selectedHotel, otherHotelName, otherHotelAddress, otherHotelPostalCode, otherHotelCity, otherHotelCountry, address, postalCode, city, country } = orderData;
 
     // Extraire le jour et mois de la date de livraison
     const deliveryDateParts = deliveryDate.split(' ');
@@ -54,15 +54,15 @@ export default function PaymentSuccessPage() {
     
     const orderNumber = `CMD ${day}${monthNumber}-${currentCounter}`;
 
-    const sbmDetails = Array.isArray(sbmItems)
-      ? sbmItems.map((item, index) => 
-          `\n  SBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
+    const sbmDetails = Array.isArray(sbmLots)
+      ? sbmLots.map((lot, index) => 
+          `\n  SBM #${index + 1}: Piment(${lot.options?.piment ? 'Oui' : 'Non'}), Oeuf(${lot.options?.oeuf ? 'Oui' : 'Non'}), Mekbouba(${lot.options?.mekbouba ? 'Oui' : 'Non'}), Boulettes supp: ${lot.boulettesSupp || 0}`
         ).join('')
       : '';
     
-    const bbmDetails = Array.isArray(bbmItems)
-      ? bbmItems.map((item, index) => 
-          `\n  BBM #${index + 1}: Piment(${item.piment ? 'Oui' : 'Non'}), Oeuf(${item.oeuf ? 'Oui' : 'Non'}), Mekbouba(${item.mekbouba ? 'Oui' : 'Non'}), Boulettes(${item.boulettes ? 'Oui' : 'Non'})`
+    const bbmDetails = Array.isArray(bbmLots)
+      ? bbmLots.map((lot, index) => 
+          `\n  BBM #${index + 1}: Piment(${lot.options?.piment ? 'Oui' : 'Non'}), Oeuf(${lot.options?.oeuf ? 'Oui' : 'Non'}), Mekbouba(${lot.options?.mekbouba ? 'Oui' : 'Non'}), Boulettes supp: ${lot.boulettesSupp || 0}`
         ).join('')
       : '';
 
@@ -78,8 +78,8 @@ export default function PaymentSuccessPage() {
       deliveryAddress = `Adresse: ${address}, ${postalCode}, ${city}, ${country}`;
     }
 
-    const sbmCount = Array.isArray(sbmItems) ? sbmItems.length : 0;
-    const bbmCount = Array.isArray(bbmItems) ? bbmItems.length : 0;
+    const sbmCount = Array.isArray(sbmLots) ? sbmLots.reduce((sum, lot) => sum + lot.qty, 0) : 0;
+    const bbmCount = Array.isArray(bbmLots) ? bbmLots.reduce((sum, lot) => sum + lot.qty, 0) : 0;
     const subtotal = sbmCount * 26 + bbmCount * 26;
     const totalItems = sbmCount + bbmCount;
     const deliveryFee = totalItems >= 6 ? 0 : 15;
@@ -156,7 +156,7 @@ ${paymentInfo}
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
               <p className="text-green-800 text-sm">
-                ⚠️ RENVOYEZ LE MESSAGE WhatsApp CI-DESSOUS POUR ENVOYER VOTRE COMMANDE EN CUISINE. 📱
+                ⚠️ RENVOYEZ LE MESSAGE WhatsApp CI-DESSOUS POUR ENVOYER VOTRE COMMANDE EN CUISINE.
               </p>
             </div>
 
@@ -165,7 +165,7 @@ ${paymentInfo}
                 onClick={sendWhatsAppMessage}
                 className="block w-full bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors"
               >
-                📱 Renvoyer le message WhatsApp
+                Renvoyer le message WhatsApp
               </button>
               
               <Link 

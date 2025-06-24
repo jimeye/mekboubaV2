@@ -10,16 +10,21 @@ export async function POST(request) {
     let paymentIntent;
 
     // On extrait uniquement les champs essentiels pour le metadata Stripe
-    const { deliveryDate, deliveryTime, firstName, lastName, phone, notes, sbmItems, bbmItems } = orderData;
+    const { deliveryDate, deliveryTime, firstName, lastName, phone, notes, sbmLots, bbmLots } = orderData;
+    
+    // Calcul des totaux pour réduire la taille des données
+    const sbmTotal = sbmLots && Array.isArray(sbmLots) ? sbmLots.reduce((sum, lot) => sum + lot.qty, 0) : 0;
+    const bbmTotal = bbmLots && Array.isArray(bbmLots) ? bbmLots.reduce((sum, lot) => sum + lot.qty, 0) : 0;
+    
     const simplifiedOrderData = {
-      deliveryDate,
-      deliveryTime,
-      firstName,
-      lastName,
-      phone,
-      sbmItemsCount: sbmItems && Array.isArray(sbmItems) ? sbmItems.length : 0,
-      bbmItemsCount: bbmItems && Array.isArray(bbmItems) ? bbmItems.length : 0,
-      notes: notes ? notes.substring(0, 100) : ''
+      deliveryDate: deliveryDate || '',
+      deliveryTime: deliveryTime || '',
+      firstName: firstName || '',
+      lastName: lastName || '',
+      phone: phone || '',
+      sbmTotal,
+      bbmTotal,
+      notes: notes ? notes.substring(0, 50) : ''
     };
 
     if (paymentType === 'cash_validation') {
