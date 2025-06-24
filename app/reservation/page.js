@@ -257,7 +257,7 @@ export default function ReservationPage() {
                   {/* SBM */}
                   <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <div className="flex justify-between items-center">
-                          <h3 className="font-semibold text-lg">🥪 Sandwich Boulettes Mekbouba 26 €</h3>
+                          <h3 className="font-semibold text-lg">🥪 Sandwich Boulettes SBM 26 €</h3>
                           <button type="button" onClick={() => addItem('sbm')} className="bg-accent-red text-white px-1 md:px-2 py-0.5 md:py-1 rounded-lg font-semibold text-xs md:text-sm">+ Ajouter</button>
                       </div>
                       {formData.sbmItems.map((item, index) => (
@@ -272,7 +272,7 @@ export default function ReservationPage() {
                                   <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('sbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
                               </div>
                               <div className="flex items-center mt-2 space-x-2">
-                                <label className="text-xs font-medium">🥘 Boulettes 5 € sup</label>
+                                <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
                                 <select
                                   className="border rounded px-0 py-0 text-[10px] w-8 h-4"
                                   value={item.boulettesSupp || 0}
@@ -307,7 +307,7 @@ export default function ReservationPage() {
                                 <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('bbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
                               </div>
                               <div className="flex items-center mt-2 space-x-2">
-                                <label className="text-xs font-medium">🥘 Boulettes 5 € sup</label>
+                                <label className="text-xs font-medium">🥘 Boulettes SUP 5 €</label>
                                 <select
                                   className="border rounded px-0 py-0 text-[10px] w-8 h-4"
                                   value={item.boulettesSupp || 0}
