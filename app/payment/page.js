@@ -99,12 +99,13 @@ export default function PaymentPage() {
   const [paymentType, setPaymentType] = useState(null);
   const [amount, setAmount] = useState(0);
   const [clientSecret, setClientSecret] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const orderDataParam = searchParams.get('orderData');
     const paymentTypeParam = searchParams.get('paymentType');
     const amountParam = searchParams.get('amount');
-    const clientSecretParam = searchParams.get('clientSecret');
 
     if (orderDataParam) {
       setOrderData(JSON.parse(decodeURIComponent(orderDataParam)));
@@ -115,10 +116,38 @@ export default function PaymentPage() {
     if (amountParam) {
       setAmount(parseInt(amountParam));
     }
-    if (clientSecretParam) {
-      setClientSecret(clientSecretParam);
-    }
   }, [searchParams]);
+
+  // Générer le clientSecret dès que les infos sont prêtes
+  useEffect(() => {
+    const fetchClientSecret = async () => {
+      if (orderData && paymentType && amount) {
+        setLoading(true);
+        setError(null);
+        try {
+          const response = await fetch('/api/create-payment-intent', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              amount: amount * 100,
+              paymentType,
+              orderData
+            }),
+          });
+          const { clientSecret, error: apiError } = await response.json();
+          if (apiError) throw new Error(apiError);
+          setClientSecret(clientSecret);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+    fetchClientSecret();
+  }, [orderData, paymentType, amount]);
 
   if (!orderData || !paymentType) {
     return (
@@ -126,6 +155,27 @@ export default function PaymentPage() {
         <div className="bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-red-600">Erreur</h2>
           <p className="text-gray-600">Données de commande manquantes</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading || !clientSecret) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold text-gray-800">Chargement du paiement…</h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold text-red-600">Erreur</h2>
+          <p className="text-gray-600">{error}</p>
         </div>
       </div>
     );
@@ -147,7 +197,7 @@ export default function PaymentPage() {
             </p>
           </div>
 
-          <Elements stripe={stripePromise}>
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
             <PaymentForm 
               orderData={orderData} 
               paymentType={paymentType} 
