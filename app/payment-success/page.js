@@ -156,7 +156,7 @@ ${paymentInfo}
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
               <p className="text-green-800 text-sm">
-                ⚠️ RENVOYEZ LE MESSAGE WHATSAPP CI-DESSOUS POUR ENVOYER VOTRE COMMANDE EN CUISINE.
+                ⚠️ RENVOYEZ LE MESSAGE WhatsApp CI-DESSOUS POUR ENVOYER VOTRE COMMANDE EN CUISINE. 📱
               </p>
             </div>
 
