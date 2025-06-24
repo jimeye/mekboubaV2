@@ -343,14 +343,14 @@ export default function ReservationPage() {
                       <div className="flex items-center ml-auto">
                         <button
                           type="button"
-                          className="bg-accent-red text-white rounded-l-lg px-1 py-1 font-bold text-lg disabled:opacity-50"
+                          className="bg-accent-red text-white rounded-l-lg px-4 md:px-6 py-1 md:py-1.5 font-semibold text-sm disabled:opacity-50"
                           onClick={() => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.max(0, prev.boulettesSuppGlobal - 1) }))}
                           disabled={formData.boulettesSuppGlobal <= 0}
                         >-</button>
-                        <span className="bg-accent-red text-white px-2 py-1 font-bold text-lg select-none">{formData.boulettesSuppGlobal}</span>
+                        <span className="bg-accent-red text-white px-4 md:px-6 py-1 md:py-1.5 font-semibold text-sm select-none rounded-none">{formData.boulettesSuppGlobal}</span>
                         <button
                           type="button"
-                          className="bg-accent-red text-white rounded-r-lg px-1 py-1 font-bold text-lg disabled:opacity-50"
+                          className="bg-accent-red text-white rounded-r-lg px-4 md:px-6 py-1 md:py-1.5 font-semibold text-sm disabled:opacity-50"
                           onClick={() => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.min(20, prev.boulettesSuppGlobal + 1) }))}
                           disabled={formData.boulettesSuppGlobal >= 20}
                         >+</button>
