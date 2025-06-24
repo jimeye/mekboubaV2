@@ -270,17 +270,16 @@ export default function ReservationPage() {
                                   <label className="flex items-center text-xs"><input type="checkbox" checked={item.piment} onChange={e => updateItem('sbm', item.id, 'piment', e.target.checked)} className="mr-1"/>🌶️ Piment</label>
                                   <label className="flex items-center text-xs"><input type="checkbox" checked={item.oeuf} onChange={e => updateItem('sbm', item.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
                                   <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('sbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
-                                  <label className="flex items-center text-xs"><input type="checkbox" checked={item.boulettes} onChange={e => updateItem('sbm', item.id, 'boulettes', e.target.checked)} className="mr-1"/>🥘 Boulettes</label>
                               </div>
                               <div className="flex items-center mt-2 space-x-2">
-                                <label className="text-xs font-medium">Boulettes supp. :</label>
+                                <label className="text-xs font-medium">🥘 Boulettes 5 € sup</label>
                                 <select
-                                  className="border rounded px-1 py-0.5 text-xs"
+                                  className="border rounded px-0 py-0 text-[10px] w-8 h-4"
                                   value={item.boulettesSupp || 0}
                                   onChange={e => updateItem('sbm', item.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
                                 >
                                   {[...Array(11).keys()].map(n => (
-                                    <option key={n} value={n}>{n} x 5€</option>
+                                    <option key={n} value={n}>{n}</option>
                                   ))}
                                 </select>
                               </div>
@@ -306,17 +305,16 @@ export default function ReservationPage() {
                                 <label className="flex items-center text-xs"><input type="checkbox" checked={item.piment} onChange={e => updateItem('bbm', item.id, 'piment', e.target.checked)} className="mr-1"/>🌶️ Piment</label>
                                 <label className="flex items-center text-xs"><input type="checkbox" checked={item.oeuf} onChange={e => updateItem('bbm', item.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
                                 <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('bbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
-                                <label className="flex items-center text-xs"><input type="checkbox" checked={item.boulettes} onChange={e => updateItem('bbm', item.id, 'boulettes', e.target.checked)} className="mr-1"/>🥘 Boulettes</label>
                               </div>
                               <div className="flex items-center mt-2 space-x-2">
-                                <label className="text-xs font-medium">Boulettes supp. :</label>
+                                <label className="text-xs font-medium">🥘 Boulettes 5 € sup</label>
                                 <select
-                                  className="border rounded px-1 py-0.5 text-xs"
+                                  className="border rounded px-0 py-0 text-[10px] w-8 h-4"
                                   value={item.boulettesSupp || 0}
                                   onChange={e => updateItem('bbm', item.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
                                 >
                                   {[...Array(11).keys()].map(n => (
-                                    <option key={n} value={n}>{n} x 5€</option>
+                                    <option key={n} value={n}>{n}</option>
                                   ))}
                                 </select>
                               </div>
