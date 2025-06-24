@@ -53,7 +53,9 @@ export default function ReservationPage() {
     'Autre hôtel'
   ];
 
-  const subtotal = formData.sbmItems.length * prices.sbm + formData.bbmItems.length * prices.bbm;
+  const boulettesSuppTotal = formData.sbmItems.reduce((sum, item) => sum + (item.boulettesSupp || 0), 0) + formData.bbmItems.reduce((sum, item) => sum + (item.boulettesSupp || 0), 0);
+  const boulettesSuppPrice = boulettesSuppTotal * 5;
+  const subtotal = formData.sbmItems.length * prices.sbm + formData.bbmItems.length * prices.bbm + boulettesSuppPrice;
   const totalItems = formData.sbmItems.length + formData.bbmItems.length;
   const deliveryFee = totalItems >= 6 ? 0 : 15;
   const total = subtotal + deliveryFee;
@@ -134,7 +136,7 @@ export default function ReservationPage() {
   };
 
   const addItem = (itemType) => {
-    const newItem = { id: Date.now(), piment: true, mekbouba: true, oeuf: true, boulettes: true };
+    const newItem = { id: Date.now(), piment: true, mekbouba: true, oeuf: true, boulettes: true, boulettesSupp: 0 };
     setFormData(prev => ({
       ...prev,
       [`${itemType}Items`]: [...prev[`${itemType}Items`], newItem]
@@ -270,6 +272,18 @@ export default function ReservationPage() {
                                   <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('sbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
                                   <label className="flex items-center text-xs"><input type="checkbox" checked={item.boulettes} onChange={e => updateItem('sbm', item.id, 'boulettes', e.target.checked)} className="mr-1"/>🥘 Boulettes</label>
                               </div>
+                              <div className="flex items-center mt-2 space-x-2">
+                                <label className="text-xs font-medium">Boulettes supp. :</label>
+                                <select
+                                  className="border rounded px-1 py-0.5 text-xs"
+                                  value={item.boulettesSupp || 0}
+                                  onChange={e => updateItem('sbm', item.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
+                                >
+                                  {[...Array(11).keys()].map(n => (
+                                    <option key={n} value={n}>{n} x 5€</option>
+                                  ))}
+                                </select>
+                              </div>
                               <div className="text-xs text-gray-600 italic mt-1">
                                 bon le kiffe c'est de ne rien enlever ! au pire le piment 🌶️ ! As you like
                               </div>
@@ -293,6 +307,18 @@ export default function ReservationPage() {
                                 <label className="flex items-center text-xs"><input type="checkbox" checked={item.oeuf} onChange={e => updateItem('bbm', item.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
                                 <label className="flex items-center text-xs"><input type="checkbox" checked={item.mekbouba} onChange={e => updateItem('bbm', item.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
                                 <label className="flex items-center text-xs"><input type="checkbox" checked={item.boulettes} onChange={e => updateItem('bbm', item.id, 'boulettes', e.target.checked)} className="mr-1"/>🥘 Boulettes</label>
+                              </div>
+                              <div className="flex items-center mt-2 space-x-2">
+                                <label className="text-xs font-medium">Boulettes supp. :</label>
+                                <select
+                                  className="border rounded px-1 py-0.5 text-xs"
+                                  value={item.boulettesSupp || 0}
+                                  onChange={e => updateItem('bbm', item.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
+                                >
+                                  {[...Array(11).keys()].map(n => (
+                                    <option key={n} value={n}>{n} x 5€</option>
+                                  ))}
+                                </select>
                               </div>
                               <div className="text-xs text-gray-600 italic mt-1">
                                 bon le kiffe c'est de ne rien enlever ! au pire le piment 🌶️ ! As you like
