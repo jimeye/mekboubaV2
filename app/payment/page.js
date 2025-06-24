@@ -31,10 +31,13 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
         requestPayerEmail: true,
       });
 
+      // Gérer les événements Apple Pay
       pr.on('paymentmethod', async (event) => {
         setLoading(true);
         setError(null);
+
         try {
+          // Créer l'intention de paiement
           const response = await fetch('/api/create-payment-intent', {
             method: 'POST',
             headers: {
@@ -46,20 +49,29 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
               orderData
             }),
           });
+
           const { clientSecret, error: apiError } = await response.json();
-          if (apiError) throw new Error(apiError);
+
+          if (apiError) {
+            throw new Error(apiError);
+          }
+
+          // Confirmer le paiement Apple Pay
           const { error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: event.paymentMethod.id,
           });
+
           if (confirmError) {
             event.complete('fail');
             setError(confirmError.message);
           } else {
             event.complete('success');
             setSuccess(true);
+            // Succès - rediriger vers confirmation
             const successUrl = paymentType === 'cash_validation' 
               ? `/payment-success?type=cash&orderData=${encodeURIComponent(JSON.stringify(orderData))}`
               : `/payment-success?type=full&orderData=${encodeURIComponent(JSON.stringify(orderData))}`;
+            
             router.push(successUrl);
           }
         } catch (err) {
@@ -69,9 +81,11 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
           setLoading(false);
         }
       });
+
       pr.on('cancel', () => {
         setError('Paiement annulé');
       });
+
       pr.canMakePayment().then(result => {
         if (result) {
           setPaymentRequest(pr);
@@ -84,36 +98,47 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
+
     if (!stripe || !elements) {
       setLoading(false);
       return;
     }
+
     try {
+      // Créer l'intention de paiement
       const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: amount * 100,
+          amount: amount * 100, // Convertir en centimes
           paymentType,
           orderData
         }),
       });
+
       const { clientSecret, error: apiError } = await response.json();
-      if (apiError) throw new Error(apiError);
+
+      if (apiError) {
+        throw new Error(apiError);
+      }
+
+      // Confirmer le paiement
       const { error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         }
       });
+
       if (confirmError) {
         setError(confirmError.message);
       } else {
-        setSuccess(true);
+        // Succès - rediriger vers confirmation
         const successUrl = paymentType === 'cash_validation' 
           ? `/payment-success?type=cash&orderData=${encodeURIComponent(JSON.stringify(orderData))}`
           : `/payment-success?type=full&orderData=${encodeURIComponent(JSON.stringify(orderData))}`;
+        
         router.push(successUrl);
       }
     } catch (err) {
@@ -132,6 +157,7 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             : '💳 Paiement complet'
           }
         </h3>
+        
         <div className="mb-4">
           <p className="text-gray-600 mb-2">
             {paymentType === 'cash_validation' 
@@ -140,6 +166,7 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             }
           </p>
         </div>
+
         {/* Bouton Apple Pay / Google Pay */}
         {paymentRequest && (
           <div className="mb-6">
@@ -160,6 +187,9 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
                 },
               }}
               onReady={() => setPrButtonReady(true)}
+              onClick={event => {
+                // Optionnel : gestion d'événements
+              }}
             />
             {!prButtonReady && (
               <div className="text-gray-500 text-sm mt-2 text-center">Chargement du bouton Apple Pay / Google Pay…</div>
@@ -174,7 +204,8 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             </div>
           </div>
         )}
-        {/* Séparateur */}
+
+        {/* Séparateur si Apple Pay est disponible */}
         {paymentRequest && (
           <div className="relative mb-6">
             <div className="absolute inset-0 flex items-center">
@@ -185,6 +216,7 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             </div>
           </div>
         )}
+
         <div className="border border-gray-300 rounded-lg p-4 mb-4">
           <CardElement
             options={{
@@ -203,16 +235,19 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
             }}
           />
         </div>
+
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
             {error}
           </div>
         )}
+
         {success && (
           <div className="text-green-600 font-bold text-center my-4">
             Paiement validé ! Merci pour votre commande.
           </div>
         )}
+
         <button
           type="submit"
           disabled={!stripe || loading}
@@ -234,8 +269,6 @@ export default function PaymentPage() {
   const [orderData, setOrderData] = useState(null);
   const [paymentType, setPaymentType] = useState(null);
   const [amount, setAmount] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const orderDataParam = searchParams.get('orderData');
@@ -264,27 +297,6 @@ export default function PaymentPage() {
     );
   }
 
-  if (loading || !paymentRequest) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-800">Chargement du paiement…</h2>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-red-600">Erreur</h2>
-          <p className="text-gray-600">{error}</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-100 py-12">
       <div className="container mx-auto px-4">
@@ -301,7 +313,7 @@ export default function PaymentPage() {
             </p>
           </div>
 
-          <Elements stripe={stripePromise} options={{ clientSecret: paymentRequest.id }}>
+          <Elements stripe={stripePromise}>
             <PaymentForm 
               orderData={orderData} 
               paymentType={paymentType} 
