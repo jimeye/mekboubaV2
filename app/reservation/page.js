@@ -283,12 +283,12 @@ export default function ReservationPage() {
                         <div className="flex items-center space-x-2 mb-1">
                           <label className="text-xs font-medium">Quantité :</label>
                           <select
-                            className="border rounded px-1 py-0.5 text-xs w-11"
+                            className="border rounded px-1 py-0.5 text-xs w-11 h-4"
                             value={lot.qty}
-                            onChange={e => updateLot('sbm', lot.id, 'qty', Math.max(0, Math.min(10, parseInt(e.target.value))))}
+                            onChange={e => updateLot('sbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
                           >
-                            {[...Array(11).keys()].map(n => (
-                              <option key={n} value={n}>{n}</option>
+                            {[...Array(10).keys()].map(n => (
+                              <option key={n+1} value={n+1}>{n+1}</option>
                             ))}
                           </select>
                         </div>
@@ -330,12 +330,12 @@ export default function ReservationPage() {
                         <div className="flex items-center space-x-2 mb-1">
                           <label className="text-xs font-medium">Quantité :</label>
                           <select
-                            className="border rounded px-1 py-0.5 text-xs w-11"
+                            className="border rounded px-1 py-0.5 text-xs w-11 h-4"
                             value={lot.qty}
-                            onChange={e => updateLot('bbm', lot.id, 'qty', Math.max(0, Math.min(10, parseInt(e.target.value))))}
+                            onChange={e => updateLot('bbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
                           >
-                            {[...Array(11).keys()].map(n => (
-                              <option key={n} value={n}>{n}</option>
+                            {[...Array(10).keys()].map(n => (
+                              <option key={n+1} value={n+1}>{n+1}</option>
                             ))}
                           </select>
                         </div>
