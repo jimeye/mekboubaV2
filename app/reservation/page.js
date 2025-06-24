@@ -24,7 +24,8 @@ export default function ReservationPage() {
     phone: '',
     notes: '',
     sbmLots: [],
-    bbmLots: []
+    bbmLots: [],
+    boulettesSuppGlobal: 0
   });
 
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -53,8 +54,9 @@ export default function ReservationPage() {
     'Autre hôtel'
   ];
 
-  const subtotal = formData.sbmLots.reduce((sum, lot) => sum + lot.qty * prices.sbm + lot.boulettesSupp * 5, 0)
-    + formData.bbmLots.reduce((sum, lot) => sum + lot.qty * prices.bbm + lot.boulettesSupp * 5, 0);
+  const subtotal = formData.sbmLots.reduce((sum, lot) => sum + lot.qty * prices.sbm, 0)
+    + formData.bbmLots.reduce((sum, lot) => sum + lot.qty * prices.bbm, 0)
+    + (formData.boulettesSuppGlobal * 5);
   const totalItems = formData.sbmLots.reduce((sum, lot) => sum + lot.qty, 0) + formData.bbmLots.reduce((sum, lot) => sum + lot.qty, 0);
   const deliveryFee = totalItems >= 6 ? 0 : 15;
   const total = subtotal + deliveryFee;
@@ -297,18 +299,6 @@ export default function ReservationPage() {
                           <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.oeuf} onChange={e => updateLotOption('sbm', lot.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
                           <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.mekbouba} onChange={e => updateLotOption('sbm', lot.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
-                          <select
-                            className="border rounded px-0 py-0 text-[10px] w-8 h-4"
-                            value={lot.boulettesSupp}
-                            onChange={e => updateLot('sbm', lot.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
-                          >
-                            {[...Array(11).keys()].map(n => (
-                              <option key={n} value={n}>{n}</option>
-                            ))}
-                          </select>
-                        </div>
                       </div>
                     ))}
                   </div>
@@ -344,20 +334,20 @@ export default function ReservationPage() {
                           <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.oeuf} onChange={e => updateLotOption('bbm', lot.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
                           <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.mekbouba} onChange={e => updateLotOption('bbm', lot.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
-                          <select
-                            className="border rounded px-0 py-0 text-[10px] w-8 h-4"
-                            value={lot.boulettesSupp}
-                            onChange={e => updateLot('bbm', lot.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
-                          >
-                            {[...Array(11).keys()].map(n => (
-                              <option key={n} value={n}>{n}</option>
-                            ))}
-                          </select>
-                        </div>
                       </div>
                     ))}
+                  </div>
+                  <div className="flex items-center mt-4 space-x-2">
+                    <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
+                    <select
+                      className="border rounded px-0 py-0 text-[10px] w-11 h-5"
+                      value={formData.boulettesSuppGlobal}
+                      onChange={e => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.max(0, Math.min(20, parseInt(e.target.value))) }))}
+                    >
+                      {[...Array(21).keys()].map(n => (
+                        <option key={n} value={n}>{n}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="mt-6">
                     <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Notes (allergies, etc.)</label>
