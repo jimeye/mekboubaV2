@@ -283,7 +283,7 @@ export default function ReservationPage() {
                         <div className="flex items-center space-x-2 mb-1">
                           <label className="text-xs font-medium">Quantité :</label>
                           <select
-                            className="border rounded px-1 py-0.5 text-xs w-12"
+                            className="border rounded px-1 py-0.5 text-xs w-8"
                             value={lot.qty}
                             onChange={e => updateLot('sbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
                           >
@@ -330,7 +330,7 @@ export default function ReservationPage() {
                         <div className="flex items-center space-x-2 mb-1">
                           <label className="text-xs font-medium">Quantité :</label>
                           <select
-                            className="border rounded px-1 py-0.5 text-xs w-12"
+                            className="border rounded px-1 py-0.5 text-xs w-8"
                             value={lot.qty}
                             onChange={e => updateLot('bbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
                           >
