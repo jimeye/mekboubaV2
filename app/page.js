@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Navbar from './components/Navbar';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HeroSliderNew from './components/HeroSliderNew';
 
 const heroImages = [
@@ -44,6 +44,17 @@ const tajineImages = [
 
 export default function HomeNew() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+
+  // S'assurer que la page se positionne en haut lors du rafraîchissement
+  useEffect(() => {
+    // Scroll vers le haut de la page
+    window.scrollTo(0, 0);
+    
+    // Empêcher le scroll automatique vers les ancres
+    if (window.location.hash) {
+      window.location.hash = '';
+    }
+  }, []);
 
   const handleSliderScroll = (isScrolledOnSlider) => {
     setIsHeaderVisible(!isScrolledOnSlider);
