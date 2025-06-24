@@ -16,6 +16,7 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
   const [error, setError] = useState(null);
   const [paymentRequest, setPaymentRequest] = useState(null);
   const [prButtonReady, setPrButtonReady] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     if (stripe) {
@@ -29,13 +30,69 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
         requestPayerName: true,
         requestPayerEmail: true,
       });
+
+      // Gérer les événements Apple Pay
+      pr.on('paymentmethod', async (event) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+          // Créer l'intention de paiement
+          const response = await fetch('/api/create-payment-intent', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              amount: amount * 100,
+              paymentType,
+              orderData
+            }),
+          });
+
+          const { clientSecret, error: apiError } = await response.json();
+
+          if (apiError) {
+            throw new Error(apiError);
+          }
+
+          // Confirmer le paiement Apple Pay
+          const { error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: event.paymentMethod.id,
+          });
+
+          if (confirmError) {
+            event.complete('fail');
+            setError(confirmError.message);
+          } else {
+            event.complete('success');
+            setSuccess(true);
+            // Succès - rediriger vers confirmation
+            const successUrl = paymentType === 'cash_validation' 
+              ? `/payment-success?type=cash&orderData=${encodeURIComponent(JSON.stringify(orderData))}`
+              : `/payment-success?type=full&orderData=${encodeURIComponent(JSON.stringify(orderData))}`;
+            
+            router.push(successUrl);
+          }
+        } catch (err) {
+          event.complete('fail');
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      });
+
+      pr.on('cancel', () => {
+        setError('Paiement annulé');
+      });
+
       pr.canMakePayment().then(result => {
         if (result) {
           setPaymentRequest(pr);
         }
       });
     }
-  }, [stripe, amount]);
+  }, [stripe, amount, paymentType, orderData, router]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -112,7 +169,12 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
 
         {/* Bouton Apple Pay / Google Pay */}
         {paymentRequest && (
-          <div className="mb-4">
+          <div className="mb-6">
+            <div className="text-center mb-3">
+              <p className="text-sm text-gray-600 mb-2">
+                💳 Paiement rapide et sécurisé
+              </p>
+            </div>
             <PaymentRequestButtonElement
               options={{
                 paymentRequest,
@@ -130,8 +192,28 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
               }}
             />
             {!prButtonReady && (
-              <div className="text-gray-500 text-sm mt-2">Chargement du bouton Apple Pay / Google Pay…</div>
+              <div className="text-gray-500 text-sm mt-2 text-center">Chargement du bouton Apple Pay / Google Pay…</div>
             )}
+            <div className="text-center mt-3">
+              <p className="text-xs text-gray-500">
+                {paymentType === 'cash_validation' 
+                  ? 'Validation gratuite pour confirmer votre commande'
+                  : `Paiement sécurisé de ${amount}€`
+                }
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Séparateur si Apple Pay est disponible */}
+        {paymentRequest && (
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">ou</span>
+            </div>
           </div>
         )}
 
@@ -156,13 +238,13 @@ const PaymentForm = ({ orderData, paymentType, amount }) => {
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
-            {(error === 'Your card was declined.' || error.toLowerCase().includes('refus')) ? (
-              orderData?.firstName
-                ? `Désolé ${orderData.firstName}, le paiement a été refusé. Merci de vérifier votre carte ou d'essayer un autre moyen de paiement.`
-                : 'Désolé, le paiement a été refusé. Merci de vérifier votre carte ou d'essayer un autre moyen de paiement.'
-            ) : (
-              error
-            )}
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="text-green-600 font-bold text-center my-4">
+            Paiement validé ! Merci pour votre commande.
           </div>
         )}
 
