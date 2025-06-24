@@ -87,7 +87,8 @@ export default function HomeNew() {
                   alt="Cuisine traditionnelle"
                   fill
                   className="object-cover"
-                  unoptimized
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={85}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               </div>
@@ -104,7 +105,8 @@ export default function HomeNew() {
               alt=""
               fill
             className="object-cover opacity-45"
-              unoptimized
+              sizes="100vw"
+              quality={75}
             />
         </div>
         
@@ -127,7 +129,8 @@ export default function HomeNew() {
                     alt=""
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    unoptimized
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={85}
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
@@ -163,7 +166,8 @@ export default function HomeNew() {
                     alt=""
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    unoptimized
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={85}
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
@@ -199,7 +203,8 @@ export default function HomeNew() {
                     alt=""
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    unoptimized
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={85}
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
@@ -249,7 +254,8 @@ export default function HomeNew() {
                     alt={`Galerie ${index + 1}`}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    unoptimized
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={85}
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                   </div>
@@ -268,7 +274,8 @@ export default function HomeNew() {
                       alt=""
                       fill
                       className="object-cover"
-                      unoptimized
+                      sizes="100vw"
+                      quality={75}
                     />
                   </div>
         

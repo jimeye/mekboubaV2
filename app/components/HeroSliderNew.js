@@ -10,14 +10,14 @@ export default function HeroSliderNew({ images, onSliderScroll }) {
   const [touchEnd, setTouchEnd] = useState(null);
   const sliderRef = useRef(null);
 
-  // Auto-play (optionnel, peut être désactivé)
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, 8000); // 8 secondes par slide
+  // Auto-play désactivé pour éviter les conflits de scroll
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % images.length);
+  //   }, 8000); // 8 secondes par slide
 
-    return () => clearInterval(timer);
-  }, [images.length]);
+  //   return () => clearInterval(timer);
+  // }, [images.length]);
 
   const handleSliderScroll = (event) => {
     const isScrolled = event.currentTarget.scrollTop > 1;
@@ -81,8 +81,9 @@ export default function HeroSliderNew({ images, onSliderScroll }) {
               alt="Logo Ile"
               fill
               className="object-contain"
-              unoptimized
               priority
+              sizes="(max-width: 768px) 128px, 208px"
+              quality={85}
             />
           </div>
         </div>
@@ -100,7 +101,8 @@ export default function HeroSliderNew({ images, onSliderScroll }) {
                 fill
                 className="object-cover"
                 priority={index === 0}
-                unoptimized
+                sizes="100vw"
+                quality={85}
               />
               <div className="absolute inset-0 bg-black/30" />
               <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10">
