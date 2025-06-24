@@ -10,6 +10,15 @@ export default function HeroSliderNew({ images, onSliderScroll }) {
   const [touchEnd, setTouchEnd] = useState(null);
   const sliderRef = useRef(null);
 
+  // Forcer le scroll vers le haut au chargement de la page
+  useEffect(() => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollTop = 0;
+    }
+    // Forcer aussi le scroll de la page principale
+    window.scrollTo(0, 0);
+  }, []);
+
   // Auto-play désactivé pour éviter les conflits de scroll
   // useEffect(() => {
   //   const timer = setInterval(() => {
