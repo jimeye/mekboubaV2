@@ -256,12 +256,9 @@ export default function ReservationPage() {
                   <h2 className="text-xl font-semibold mb-4 text-gray-700">Votre commande</h2>
                   {/* SBM */}
                   <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                      <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-semibold text-lg leading-tight">Sandwich Boulettes</h3>
-                            <div className="font-semibold text-lg leading-tight">SBM 26 € 🥪</div>
-                          </div>
-                          <button type="button" onClick={() => addItem('sbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm">+</button>
+                      <div className="flex flex-col md:flex-row md:items-center">
+                        <span className="font-semibold text-lg leading-tight">Sandwich Boulettes</span>
+                        <span className="font-semibold text-lg leading-tight md:ml-2">SBM 26 € 🥪</span>
                       </div>
                       {formData.sbmItems.map((item, index) => (
                           <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
@@ -294,12 +291,9 @@ export default function ReservationPage() {
                   </div>
                   {/* BBM */}
                   <div className="bg-gray-50 p-4 rounded-lg">
-                      <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-semibold text-lg leading-tight">Box Boulettes</h3>
-                            <div className="font-semibold text-lg leading-tight">BBM 26 €🍴</div>
-                          </div>
-                          <button type="button" onClick={() => addItem('bbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm">+</button>
+                      <div className="flex flex-col md:flex-row md:items-center">
+                        <span className="font-semibold text-lg leading-tight">Box Boulettes</span>
+                        <span className="font-semibold text-lg leading-tight md:ml-2">BBM 26 €🍴</span>
                       </div>
                       {formData.bbmItems.map((item, index) => (
                           <div key={item.id} className="mt-1 ml-4 p-1.5 border-l-4 border-accent-red bg-white rounded-r-lg">
