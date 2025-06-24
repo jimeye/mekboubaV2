@@ -340,20 +340,22 @@ export default function ReservationPage() {
                   <div className="bg-gray-50 p-4 rounded-lg mt-4 mb-4">
                     <div className="flex items-center mt-4 space-x-2">
                       <span className="font-semibold text-lg leading-tight">Boulettes 5 € 🥘</span>
-                      <div className="flex items-center ml-auto">
-                        <button
-                          type="button"
-                          className="bg-accent-red text-white rounded-l-lg px-4 md:px-6 py-1 md:py-1.5 font-semibold text-sm disabled:opacity-50"
-                          onClick={() => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.max(0, prev.boulettesSuppGlobal - 1) }))}
-                          disabled={formData.boulettesSuppGlobal <= 0}
-                        >-</button>
-                        <span className="bg-accent-red text-white px-4 md:px-6 py-1 md:py-1.5 font-semibold text-sm select-none rounded-none">{formData.boulettesSuppGlobal}</span>
-                        <button
-                          type="button"
-                          className="bg-accent-red text-white rounded-r-lg px-4 md:px-6 py-1 md:py-1.5 font-semibold text-sm disabled:opacity-50"
-                          onClick={() => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.min(20, prev.boulettesSuppGlobal + 1) }))}
-                          disabled={formData.boulettesSuppGlobal >= 20}
-                        >+</button>
+                      <div className="flex items-center ml-auto w-36 justify-end">
+                        <div className="flex bg-accent-red rounded-lg overflow-hidden w-full justify-center">
+                          <button
+                            type="button"
+                            className="text-white px-4 py-1 font-semibold text-sm disabled:opacity-50"
+                            onClick={() => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.max(0, prev.boulettesSuppGlobal - 1) }))}
+                            disabled={formData.boulettesSuppGlobal <= 0}
+                          >-</button>
+                          <span className="text-white px-4 py-1 font-semibold text-sm select-none flex items-center justify-center">{formData.boulettesSuppGlobal}</span>
+                          <button
+                            type="button"
+                            className="text-white px-4 py-1 font-semibold text-sm disabled:opacity-50"
+                            onClick={() => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.min(20, prev.boulettesSuppGlobal + 1) }))}
+                            disabled={formData.boulettesSuppGlobal >= 20}
+                          >+</button>
+                        </div>
                       </div>
                     </div>
                   </div>
