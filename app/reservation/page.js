@@ -277,7 +277,7 @@ export default function ReservationPage() {
                     {formData.sbmLots.map((lot, idx) => (
                       <div key={lot.id} className="mt-2 ml-4 p-2 border-l-4 border-accent-red bg-white rounded-r-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-xs">Lot SBM #{idx + 1}</span>
+                          <span className="font-medium text-xs">Combo SBM #{idx + 1}</span>
                           <button type="button" onClick={() => removeLot('sbm', lot.id)} className="text-red-500 font-bold text-xs">✕</button>
                         </div>
                         <div className="flex items-center space-x-2 mb-1">
@@ -324,7 +324,7 @@ export default function ReservationPage() {
                     {formData.bbmLots.map((lot, idx) => (
                       <div key={lot.id} className="mt-2 ml-4 p-2 border-l-4 border-accent-red bg-white rounded-r-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-xs">Lot BBM #{idx + 1}</span>
+                          <span className="font-medium text-xs">Combo BBM #{idx + 1}</span>
                           <button type="button" onClick={() => removeLot('bbm', lot.id)} className="text-red-500 font-bold text-xs">✕</button>
                         </div>
                         <div className="flex items-center space-x-2 mb-1">
