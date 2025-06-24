@@ -33,6 +33,15 @@ const heroImages = [
   }
 ];
 
+const tajineImages = [
+  '/images/tajine2.webp', // Image principale des tajines
+  '/images/tajine1.webp', // Votre nouvelle image de tajine
+  // Ajoutez ici vos nouvelles images de tajines en format WebP
+  // Exemple: '/images/tajine3.webp', '/images/tajine4.webp', etc.
+];
+
+
+
 export default function HomeNew() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
@@ -104,7 +113,7 @@ export default function HomeNew() {
               src="/images/une experience unique.jpg"
               alt=""
               fill
-            className="object-cover opacity-45"
+            className="object-cover"
               sizes="100vw"
               quality={75}
             />
@@ -112,9 +121,9 @@ export default function HomeNew() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-gray-800 mb-6">Notre Menu</h2>
+            <h2 className="text-5xl font-bold text-white mb-6">Notre Menu</h2>
             <div className="w-24 h-1 bg-accent-red mx-auto mb-6"></div>
-            <p className="text-xl text-black max-w-2xl mx-auto">
+            <p className="text-xl text-white max-w-2xl mx-auto">
               Découvrez nos spécialités authentiques, préparées avec passion et des ingrédients de qualité
             </p>
           </div>
@@ -122,11 +131,11 @@ export default function HomeNew() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
                 {/* Sandwich Boulettes Mekbouba */}
             <div className="group relative">
-              <div className="shadow-2xl overflow-hidden flex flex-col relative border-2 border-accent-red bg-white transform transition-all duration-500 hover:scale-105 hover:shadow-3xl h-[600px]">
-                <div className="relative h-64">
+              <div className="shadow-2xl overflow-hidden flex flex-col relative border-2 border-accent-red bg-white transform transition-all duration-500 hover:scale-105 hover:shadow-3xl h-[650px]">
+                <div className="relative h-56 aspect-square">
                   <Image
-                    src="/images/une experience unique.jpg"
-                    alt=""
+                    src="/images/sbm1.webp"
+                    alt="Sandwich Boulettes Mekbouba SBM"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -159,11 +168,11 @@ export default function HomeNew() {
 
             {/* Box Boulettes Mekbouba */}
             <div className="group relative">
-              <div className="shadow-2xl overflow-hidden flex flex-col relative border-2 border-accent-red bg-white transform transition-all duration-500 hover:scale-105 hover:shadow-3xl h-[600px]">
-                <div className="relative h-64">
+              <div className="shadow-2xl overflow-hidden flex flex-col relative border-2 border-accent-red bg-white transform transition-all duration-500 hover:scale-105 hover:shadow-3xl h-[650px]">
+                <div className="relative h-56 aspect-square">
                   <Image
-                    src="/images/nos specialites.jpg"
-                    alt=""
+                    src="/images/bbm1.webp"
+                    alt="Box Boulettes Mekbouba BBM"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -196,11 +205,11 @@ export default function HomeNew() {
 
             {/* Tajines Shabbat */}
             <div className="group relative">
-              <div className="shadow-2xl overflow-hidden flex flex-col relative border-2 border-accent-red bg-white transform transition-all duration-500 hover:scale-105 hover:shadow-3xl h-[600px]">
-                <div className="relative h-64">
+              <div className="shadow-2xl overflow-hidden flex flex-col relative border-2 border-accent-red bg-white transform transition-all duration-500 hover:scale-105 hover:shadow-3xl h-[650px]">
+                <div className="relative h-56 aspect-square">
                   <Image
-                    src="/images/mekbouba1.jpeg"
-                    alt=""
+                    src="/images/tajine2.webp"
+                    alt="Tajines Shabbat"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -208,7 +217,7 @@ export default function HomeNew() {
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Tajines Shabbat<br/>35 €</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">Tajines<br/>Shabbat<br/>35 €</h3>
                   <p className="text-gray-600 mb-4 text-center flex-grow leading-relaxed">
                     Nos tajines traditionnels, loubia, hams, nikitouche, classique légumes, 
                     5 salades et sa semoule, parfaits pour vos repas entre amis.
