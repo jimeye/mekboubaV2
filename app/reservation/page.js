@@ -258,7 +258,7 @@ export default function ReservationPage() {
                   <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <div className="flex justify-between items-center">
                           <div>
-                            <h3 className="font-semibold text-lg leading-tight">🥪 Sandwich Boulettes</h3>
+                            <h3 className="font-semibold text-lg leading-tight">Sandwich Boulettes</h3>
                             <div className="font-semibold text-lg leading-tight">SBM 26 € 🥪</div>
                           </div>
                           <button type="button" onClick={() => addItem('sbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm">+</button>
