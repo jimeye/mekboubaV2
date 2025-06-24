@@ -161,19 +161,19 @@ ${paymentInfo}
             </div>
 
             <div className="space-y-4">
-              <Link 
-                href="/"
-                className="block w-full bg-accent-red text-white py-3 px-6 rounded-lg font-semibold hover:bg-accent-red/90 transition-colors"
-              >
-                🏠 Retour à l'accueil
-              </Link>
-              
               <button
                 onClick={sendWhatsAppMessage}
                 className="block w-full bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors"
               >
                 📱 Renvoyer le message WhatsApp
               </button>
+              
+              <Link 
+                href="/"
+                className="block w-full bg-accent-red text-white py-3 px-6 rounded-lg font-semibold hover:bg-accent-red/90 transition-colors"
+              >
+                🏠 Retour à l'accueil
+              </Link>
             </div>
           </div>
         </div>
