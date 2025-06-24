@@ -33,7 +33,7 @@ export default function PaymentSuccessPage() {
   const sendWhatsAppMessage = () => {
     if (!orderData) return;
 
-    const { deliveryDate, deliveryTime, firstName, lastName, phone, sbmLots, bbmLots, notes, isHotel, selectedHotel, otherHotelName, otherHotelAddress, otherHotelPostalCode, otherHotelCity, otherHotelCountry, address, postalCode, city, country } = orderData;
+    const { deliveryDate, deliveryTime, firstName, lastName, phone, sbmLots, bbmLots, notes, isHotel, selectedHotel, roomNumber, otherHotelName, otherHotelAddress, otherHotelPostalCode, otherHotelCity, otherHotelCountry, address, postalCode, city, country } = orderData;
 
     // Extraire le jour et mois de la date de livraison
     const deliveryDateParts = deliveryDate.split(' ');
@@ -69,10 +69,10 @@ export default function PaymentSuccessPage() {
     // Construire l'adresse selon le type de livraison
     let deliveryAddress = '';
     if (isHotel === 'yes') {
-      if (selectedHotel === 'Autre hôtel') {
-        deliveryAddress = `Hôtel: ${otherHotelName}\nAdresse: ${otherHotelAddress}, ${otherHotelPostalCode}, ${otherHotelCity}, ${otherHotelCountry}`;
+      if (selectedHotel === 'Autre') {
+        deliveryAddress = `Hôtel: ${otherHotelName}\nChambre: ${roomNumber}\nAdresse: ${otherHotelAddress}, ${otherHotelPostalCode}, ${otherHotelCity}, ${otherHotelCountry}`;
       } else {
-        deliveryAddress = `Hôtel: ${selectedHotel}`;
+        deliveryAddress = `Hôtel: ${selectedHotel}\nChambre: ${roomNumber}`;
       }
     } else {
       deliveryAddress = `Adresse: ${address}, ${postalCode}, ${city}, ${country}`;
@@ -93,7 +93,6 @@ export default function PaymentSuccessPage() {
 Commande ${orderNumber}
 Nouvelle Commande Mekbouba
 -----------------------------------
-Client :
 Nom: ${lastName}
 Prénom: ${firstName}
 Téléphone: ${phone}
@@ -108,10 +107,9 @@ BBM: ${bbmCount} x 26€${bbmDetails}
 
 Notes: ${notes || 'Aucune'}
 -----------------------------------
-Calcul :
 Sous-total: ${subtotal}€
 Livraison: ${deliveryFee}€
-TOTAL À PAYER: ${total}€
+TOTAL PAYÉ: ${total}€
 
 ${paymentInfo}
 `;

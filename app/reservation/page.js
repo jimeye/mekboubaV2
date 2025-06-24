@@ -12,6 +12,7 @@ export default function ReservationPage() {
     lastName: '',
     isHotel: '',
     selectedHotel: '',
+    roomNumber: '',
     otherHotelName: '',
     otherHotelAddress: '',
     otherHotelPostalCode: '',
@@ -36,22 +37,35 @@ export default function ReservationPage() {
   const prices = { sbm: 26, bbm: 26 };
 
   const ibizaHotels = [
-    'Hôtel Montesol Ibiza',
-    'Hôtel Montesol Ibiza Curio Collection by Hilton',
-    'Hôtel Ibiza Gran Hotel',
-    'Hôtel Ushuaïa Ibiza Beach Hotel',
-    'Hôtel Hard Rock Hotel Ibiza',
-    'Hôtel ME Ibiza',
-    'Hôtel Nobu Hotel Ibiza Bay',
-    'Hôtel Six Senses Ibiza',
-    'Hôtel Aguas de Ibiza Grand Luxe Hotel',
-    'Hôtel Ibiza Corso Hotel & Spa',
-    'Hôtel Mirador de Dalt Vila',
-    'Hôtel Cenit',
-    'Hôtel Ses Figueres',
-    'Hôtel Torre del Mar',
+    'Autre',
+    'Ushuaïa Ibiza Beach',
+    'Hard Rock Hotel Ibiza',
+    'Six Senses Ibiza',
+    'Nobu Hotel Ibiza Bay',
+    'Destino Pacha Ibiza Resort',
+    'Aguas de Ibiza Grand Luxe',
+    'Atzaró Agroturismo',
+    'Bless Ibiza',
+    'Casa Maca',
+    'Cenit',
+    'Es Vive',
+    'Hacienda Na Xamena',
+    'Ibiza Corso Hotel & Spa',
+    'Ibiza Gran',
+    'Los Felices (The Concept Hotels)',
+    'ME Ibiza',
+    'Mirador de Dalt Vila',
+    'Montesol Experimental',
+    'Montesol Ibiza',
+    'Montesol Ibiza Curio Collection by Hilton',
+    'OD Talamanca',
+    'OKU Ibiza',
     'Palladium Hotel Playa d\'en Bossa',
-    'Autre hôtel'
+    'Pikes Ibiza',
+    'Ses Figueres',
+    'The Unexpected Ibiza',
+    'Torre del Mar',
+    'TRS Ibiza'
   ];
 
   const subtotal = formData.sbmLots.reduce((sum, lot) => sum + lot.qty * prices.sbm, 0)
@@ -152,7 +166,11 @@ export default function ReservationPage() {
         alert('Veuillez sélectionner un hôtel.');
         return;
       }
-      if (formData.selectedHotel === 'Autre hôtel' && !formData.otherHotelName) {
+      if (!formData.roomNumber) {
+        alert('Veuillez saisir votre numéro de chambre.');
+        return;
+      }
+      if (formData.selectedHotel === 'Autre' && !formData.otherHotelName) {
         alert('Veuillez saisir le nom de votre hôtel.');
         return;
       }
@@ -417,25 +435,40 @@ export default function ReservationPage() {
                       
                       {formData.isHotel === 'yes' && (
                         <div>
-                          {formData.selectedHotel !== 'Autre hôtel' && (
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">Sélectionnez votre hôtel</label>
-                              <select 
-                                name="selectedHotel" 
-                                value={formData.selectedHotel} 
-                                onChange={handleInputChange} 
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                                required
-                              >
-                                <option value="" disabled>Sélectionnez un hôtel</option>
-                                {ibizaHotels.map(hotel => (
-                                  <option key={hotel} value={hotel}>{hotel}</option>
-                                ))}
-                              </select>
+                          {formData.selectedHotel !== 'Autre' && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Sélectionnez votre hôtel</label>
+                                <select 
+                                  name="selectedHotel" 
+                                  value={formData.selectedHotel} 
+                                  onChange={handleInputChange} 
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                  required
+                                >
+                                  <option value="" disabled>Sélectionnez un hôtel</option>
+                                  {ibizaHotels.map(hotel => (
+                                    <option key={hotel} value={hotel}>{hotel}</option>
+                                  ))}
+                                </select>
+                              </div>
+                              
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Numéro de chambre</label>
+                                <input 
+                                  type="text" 
+                                  name="roomNumber" 
+                                  value={formData.roomNumber} 
+                                  onChange={handleInputChange} 
+                                  placeholder="Ex: 205, 3ème étage, etc." 
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                  required
+                                />
+                              </div>
                             </div>
                           )}
                           
-                          {formData.selectedHotel === 'Autre hôtel' && (
+                          {formData.selectedHotel === 'Autre' && (
                             <div className="mt-4 space-y-4">
                               <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Nom de l'hôtel</label>
@@ -445,6 +478,18 @@ export default function ReservationPage() {
                                   value={formData.otherHotelName} 
                                   onChange={handleInputChange} 
                                   placeholder="Nom de votre hôtel" 
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                  required
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Numéro de chambre</label>
+                                <input 
+                                  type="text" 
+                                  name="roomNumber" 
+                                  value={formData.roomNumber} 
+                                  onChange={handleInputChange} 
+                                  placeholder="Ex: 205, 3ème étage, etc." 
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                                   required
                                 />
