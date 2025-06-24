@@ -337,17 +337,19 @@ export default function ReservationPage() {
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center mt-4 space-x-2">
-                    <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
-                    <select
-                      className="border rounded px-0 py-0 text-[10px] w-11 h-5"
-                      value={formData.boulettesSuppGlobal}
-                      onChange={e => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.max(0, Math.min(20, parseInt(e.target.value))) }))}
-                    >
-                      {[...Array(21).keys()].map(n => (
-                        <option key={n} value={n}>{n}</option>
-                      ))}
-                    </select>
+                  <div className="bg-gray-50 p-4 rounded-lg mt-4 mb-4">
+                    <div className="flex flex-row items-center justify-between">
+                      <span className="font-semibold text-lg leading-tight">🥘 Boulettes sup 5 €</span>
+                      <select
+                        className="border rounded px-0 py-0 text-[10px] w-11 h-5 ml-2"
+                        value={formData.boulettesSuppGlobal}
+                        onChange={e => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.max(0, Math.min(20, parseInt(e.target.value))) }))}
+                      >
+                        {[...Array(21).keys()].map(n => (
+                          <option key={n} value={n}>{n}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   <div className="mt-6">
                     <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Notes (allergies, etc.)</label>
