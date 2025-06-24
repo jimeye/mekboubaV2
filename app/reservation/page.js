@@ -23,12 +23,8 @@ export default function ReservationPage() {
     country: 'Espagne',
     phone: '',
     notes: '',
-    sbmQty: 0,
-    bbmQty: 0,
-    sbmOptions: { piment: true, oeuf: true, mekbouba: true },
-    bbmOptions: { piment: true, oeuf: true, mekbouba: true },
-    sbmBoulettesSupp: 0,
-    bbmBoulettesSupp: 0
+    sbmLots: [],
+    bbmLots: []
   });
 
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -57,8 +53,9 @@ export default function ReservationPage() {
     'Autre hôtel'
   ];
 
-  const subtotal = formData.sbmQty * prices.sbm + formData.bbmQty * prices.bbm + (formData.sbmBoulettesSupp + formData.bbmBoulettesSupp) * 5;
-  const totalItems = formData.sbmQty + formData.bbmQty;
+  const subtotal = formData.sbmLots.reduce((sum, lot) => sum + lot.qty * prices.sbm + lot.boulettesSupp * 5, 0)
+    + formData.bbmLots.reduce((sum, lot) => sum + lot.qty * prices.bbm + lot.boulettesSupp * 5, 0);
+  const totalItems = formData.sbmLots.reduce((sum, lot) => sum + lot.qty, 0) + formData.bbmLots.reduce((sum, lot) => sum + lot.qty, 0);
   const deliveryFee = totalItems >= 6 ? 0 : 15;
   const total = subtotal + deliveryFee;
 
@@ -201,6 +198,51 @@ export default function ReservationPage() {
   };
   const availableFridays = getAvailableFridays();
 
+  const availableTimes = [
+    '12:30 à 13:00',
+    '13:00 à 13:30',
+    '13:30 à 14:30',
+    '14:30 à 15:00'
+  ];
+
+  const addLot = (type) => {
+    const newLot = {
+      id: Date.now() + Math.random(),
+      qty: 1,
+      options: { piment: true, oeuf: true, mekbouba: true },
+      boulettesSupp: 0
+    };
+    setFormData(prev => ({
+      ...prev,
+      [`${type}Lots`]: [...prev[`${type}Lots`], newLot]
+    }));
+  };
+
+  const removeLot = (type, id) => {
+    setFormData(prev => ({
+      ...prev,
+      [`${type}Lots`]: prev[`${type}Lots`].filter(lot => lot.id !== id)
+    }));
+  };
+
+  const updateLot = (type, id, field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [`${type}Lots`]: prev[`${type}Lots`].map(lot =>
+        lot.id === id ? { ...lot, [field]: value } : lot
+      )
+    }));
+  };
+
+  const updateLotOption = (type, id, opt, checked) => {
+    setFormData(prev => ({
+      ...prev,
+      [`${type}Lots`]: prev[`${type}Lots`].map(lot =>
+        lot.id === id ? { ...lot, options: { ...lot.options, [opt]: checked } } : lot
+      )
+    }));
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <main className="flex-grow">
@@ -230,36 +272,45 @@ export default function ReservationPage() {
                         <span className="font-semibold text-lg leading-tight">Sandwich Boulettes</span>
                         <span className="font-semibold text-lg leading-tight md:ml-2">SBM 26 € 🥪</span>
                       </div>
-                      <div className="flex items-center space-x-2 mt-2 md:mt-0">
-                        <label className="text-xs font-medium">Quantité :</label>
-                        <select
-                          className="border rounded px-1 py-0.5 text-xs w-12"
-                          value={formData.sbmQty}
-                          onChange={e => setFormData(prev => ({ ...prev, sbmQty: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
-                        >
-                          {[...Array(11).keys()].map(n => (
-                            <option key={n} value={n}>{n}</option>
-                          ))}
-                        </select>
+                      <button type="button" onClick={() => addLot('sbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm mt-2 md:mt-0">+ Ajouter un lot</button>
+                    </div>
+                    {formData.sbmLots.map((lot, idx) => (
+                      <div key={lot.id} className="mt-2 ml-4 p-2 border-l-4 border-accent-red bg-white rounded-r-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-xs">Lot SBM #{idx + 1}</span>
+                          <button type="button" onClick={() => removeLot('sbm', lot.id)} className="text-red-500 font-bold text-xs">✕</button>
+                        </div>
+                        <div className="flex items-center space-x-2 mb-1">
+                          <label className="text-xs font-medium">Quantité :</label>
+                          <select
+                            className="border rounded px-1 py-0.5 text-xs w-12"
+                            value={lot.qty}
+                            onChange={e => updateLot('sbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
+                          >
+                            {[...Array(11).keys()].slice(1).map(n => (
+                              <option key={n} value={n}>{n}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="flex space-x-3 mb-1">
+                          <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.piment} onChange={e => updateLotOption('sbm', lot.id, 'piment', e.target.checked)} className="mr-1"/>🌶️ Piment</label>
+                          <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.oeuf} onChange={e => updateLotOption('sbm', lot.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
+                          <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.mekbouba} onChange={e => updateLotOption('sbm', lot.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
+                          <select
+                            className="border rounded px-0 py-0 text-[10px] w-8 h-4"
+                            value={lot.boulettesSupp}
+                            onChange={e => updateLot('sbm', lot.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
+                          >
+                            {[...Array(11).keys()].map(n => (
+                              <option key={n} value={n}>{n}</option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex space-x-3 mt-2">
-                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.sbmOptions.piment} onChange={e => setFormData(prev => ({ ...prev, sbmOptions: { ...prev.sbmOptions, piment: e.target.checked } }))} className="mr-1"/>🌶️ Piment</label>
-                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.sbmOptions.oeuf} onChange={e => setFormData(prev => ({ ...prev, sbmOptions: { ...prev.sbmOptions, oeuf: e.target.checked } }))} className="mr-1"/>🥚 Oeuf</label>
-                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.sbmOptions.mekbouba} onChange={e => setFormData(prev => ({ ...prev, sbmOptions: { ...prev.sbmOptions, mekbouba: e.target.checked } }))} className="mr-1"/>🥘 Mekbouba</label>
-                    </div>
-                    <div className="flex items-center mt-2 space-x-2">
-                      <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
-                      <select
-                        className="border rounded px-0 py-0 text-[10px] w-8 h-4"
-                        value={formData.sbmBoulettesSupp}
-                        onChange={e => setFormData(prev => ({ ...prev, sbmBoulettesSupp: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
-                      >
-                        {[...Array(11).keys()].map(n => (
-                          <option key={n} value={n}>{n}</option>
-                        ))}
-                      </select>
-                    </div>
+                    ))}
                   </div>
                   {/* BBM */}
                   <div className="bg-gray-50 p-4 rounded-lg">
@@ -268,36 +319,45 @@ export default function ReservationPage() {
                         <span className="font-semibold text-lg leading-tight">Box Boulettes</span>
                         <span className="font-semibold text-lg leading-tight md:ml-2">BBM 26 €🍴</span>
                       </div>
-                      <div className="flex items-center space-x-2 mt-2 md:mt-0">
-                        <label className="text-xs font-medium">Quantité :</label>
-                        <select
-                          className="border rounded px-1 py-0.5 text-xs w-12"
-                          value={formData.bbmQty}
-                          onChange={e => setFormData(prev => ({ ...prev, bbmQty: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
-                        >
-                          {[...Array(11).keys()].map(n => (
-                            <option key={n} value={n}>{n}</option>
-                          ))}
-                        </select>
+                      <button type="button" onClick={() => addLot('bbm')} className="bg-accent-red text-white px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-semibold text-sm mt-2 md:mt-0">+ Ajouter un lot</button>
+                    </div>
+                    {formData.bbmLots.map((lot, idx) => (
+                      <div key={lot.id} className="mt-2 ml-4 p-2 border-l-4 border-accent-red bg-white rounded-r-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-xs">Lot BBM #{idx + 1}</span>
+                          <button type="button" onClick={() => removeLot('bbm', lot.id)} className="text-red-500 font-bold text-xs">✕</button>
+                        </div>
+                        <div className="flex items-center space-x-2 mb-1">
+                          <label className="text-xs font-medium">Quantité :</label>
+                          <select
+                            className="border rounded px-1 py-0.5 text-xs w-12"
+                            value={lot.qty}
+                            onChange={e => updateLot('bbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
+                          >
+                            {[...Array(11).keys()].slice(1).map(n => (
+                              <option key={n} value={n}>{n}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="flex space-x-3 mb-1">
+                          <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.piment} onChange={e => updateLotOption('bbm', lot.id, 'piment', e.target.checked)} className="mr-1"/>🌶️ Piment</label>
+                          <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.oeuf} onChange={e => updateLotOption('bbm', lot.id, 'oeuf', e.target.checked)} className="mr-1"/>🥚 Oeuf</label>
+                          <label className="flex items-center text-xs"><input type="checkbox" checked={lot.options.mekbouba} onChange={e => updateLotOption('bbm', lot.id, 'mekbouba', e.target.checked)} className="mr-1"/>🥘 Mekbouba</label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
+                          <select
+                            className="border rounded px-0 py-0 text-[10px] w-8 h-4"
+                            value={lot.boulettesSupp}
+                            onChange={e => updateLot('bbm', lot.id, 'boulettesSupp', Math.max(0, Math.min(10, parseInt(e.target.value))))}
+                          >
+                            {[...Array(11).keys()].map(n => (
+                              <option key={n} value={n}>{n}</option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex space-x-3 mt-2">
-                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.bbmOptions.piment} onChange={e => setFormData(prev => ({ ...prev, bbmOptions: { ...prev.bbmOptions, piment: e.target.checked } }))} className="mr-1"/>🌶️ Piment</label>
-                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.bbmOptions.oeuf} onChange={e => setFormData(prev => ({ ...prev, bbmOptions: { ...prev.bbmOptions, oeuf: e.target.checked } }))} className="mr-1"/>🥚 Oeuf</label>
-                      <label className="flex items-center text-xs"><input type="checkbox" checked={formData.bbmOptions.mekbouba} onChange={e => setFormData(prev => ({ ...prev, bbmOptions: { ...prev.bbmOptions, mekbouba: e.target.checked } }))} className="mr-1"/>🥘 Mekbouba</label>
-                    </div>
-                    <div className="flex items-center mt-2 space-x-2">
-                      <label className="text-xs font-medium">🥘 Boulettes sup 5 €</label>
-                      <select
-                        className="border rounded px-0 py-0 text-[10px] w-8 h-4"
-                        value={formData.bbmBoulettesSupp}
-                        onChange={e => setFormData(prev => ({ ...prev, bbmBoulettesSupp: Math.max(0, Math.min(10, parseInt(e.target.value))) }))}
-                      >
-                        {[...Array(11).keys()].map(n => (
-                          <option key={n} value={n}>{n}</option>
-                        ))}
-                      </select>
-                    </div>
+                    ))}
                   </div>
                   <div className="mt-6">
                     <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Notes (allergies, etc.)</label>
