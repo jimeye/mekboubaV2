@@ -339,9 +339,9 @@ export default function ReservationPage() {
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg mt-4 mb-4">
                     <div className="flex flex-row items-center justify-between">
-                      <span className="font-semibold text-lg leading-tight">Boulettes sup 5 € 🥘</span>
+                      <span className="font-semibold text-lg leading-tight">Boulettes 5 € 🥘</span>
                       <select
-                        className="border rounded px-0 py-0 text-[10px] w-11 h-5 ml-2"
+                        className="border rounded px-1 py-0.5 text-xs w-11 ml-2"
                         value={formData.boulettesSuppGlobal}
                         onChange={e => setFormData(prev => ({ ...prev, boulettesSuppGlobal: Math.max(0, Math.min(20, parseInt(e.target.value))) }))}
                       >
