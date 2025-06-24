@@ -285,9 +285,9 @@ export default function ReservationPage() {
                           <select
                             className="border rounded px-1 py-0.5 text-xs w-8"
                             value={lot.qty}
-                            onChange={e => updateLot('sbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
+                            onChange={e => updateLot('sbm', lot.id, 'qty', Math.max(0, Math.min(10, parseInt(e.target.value))))}
                           >
-                            {[...Array(11).keys()].slice(1).map(n => (
+                            {[...Array(11).keys()].map(n => (
                               <option key={n} value={n}>{n}</option>
                             ))}
                           </select>
@@ -332,9 +332,9 @@ export default function ReservationPage() {
                           <select
                             className="border rounded px-1 py-0.5 text-xs w-8"
                             value={lot.qty}
-                            onChange={e => updateLot('bbm', lot.id, 'qty', Math.max(1, Math.min(10, parseInt(e.target.value))))}
+                            onChange={e => updateLot('bbm', lot.id, 'qty', Math.max(0, Math.min(10, parseInt(e.target.value))))}
                           >
-                            {[...Array(11).keys()].slice(1).map(n => (
+                            {[...Array(11).keys()].map(n => (
                               <option key={n} value={n}>{n}</option>
                             ))}
                           </select>
