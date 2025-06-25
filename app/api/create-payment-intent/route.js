@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { kv } from '@vercel/kv';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -7,45 +8,27 @@ export async function POST(request) {
   try {
     const { amount, paymentType, orderData } = await request.json();
 
-    let paymentIntent;
+    // Génère un identifiant unique pour la commande
+    const commandeId = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2);
 
-    // On extrait uniquement les champs essentiels pour le metadata Stripe
-    const { deliveryDate, deliveryTime, firstName, lastName, phone, notes, sbmLots, bbmLots } = orderData;
-    
-    // Calcul des totaux pour réduire la taille des données
-    const sbmTotal = sbmLots && Array.isArray(sbmLots) ? sbmLots.reduce((sum, lot) => sum + lot.qty, 0) : 0;
-    const bbmTotal = bbmLots && Array.isArray(bbmLots) ? bbmLots.reduce((sum, lot) => sum + lot.qty, 0) : 0;
-    
-    const simplifiedOrderData = {
-      deliveryDate: deliveryDate || '',
-      deliveryTime: deliveryTime || '',
-      firstName: firstName || '',
-      lastName: lastName || '',
-      phone: phone || '',
-      sbmTotal,
-      bbmTotal,
-      notes: notes ? notes.substring(0, 50) : ''
-    };
+    // Stocke la commande complète dans KV (expire dans 7 jours)
+    await kv.set(`commande:${commandeId}`, JSON.stringify(orderData), { ex: 60 * 60 * 24 * 7 });
+
+    let paymentIntent;
 
     if (paymentType === 'cash_validation') {
       paymentIntent = await stripe.paymentIntents.create({
         amount: 0, // 0€ pour validation
         currency: 'eur',
         payment_method_types: ['card'],
-        metadata: {
-          orderData: JSON.stringify(simplifiedOrderData),
-          paymentType: 'cash_validation'
-        }
+        metadata: { commandeId }
       });
     } else {
       paymentIntent = await stripe.paymentIntents.create({
         amount: amount, // Montant en centimes (2600 = 26€)
         currency: 'eur',
         payment_method_types: ['card'],
-        metadata: {
-          orderData: JSON.stringify(simplifiedOrderData),
-          paymentType: 'full_payment'
-        }
+        metadata: { commandeId }
       });
     }
 

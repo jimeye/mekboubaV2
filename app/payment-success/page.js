@@ -13,6 +13,7 @@ export default function PaymentSuccessPage() {
   useEffect(() => {
     const orderDataParam = searchParams.get('orderData');
     const paymentTypeParam = searchParams.get('type');
+    const paymentIntentId = searchParams.get('payment_intent');
 
     if (orderDataParam) {
       setOrderData(JSON.parse(decodeURIComponent(orderDataParam)));
@@ -20,15 +21,37 @@ export default function PaymentSuccessPage() {
     if (paymentTypeParam) {
       setPaymentType(paymentTypeParam);
     }
+
+    // Sauvegarder la commande complète
+    if (orderDataParam && paymentIntentId) {
+      saveCommande(JSON.parse(decodeURIComponent(orderDataParam)), paymentIntentId);
+    }
   }, [searchParams]);
 
-  useEffect(() => {
-    // On envoie le message WhatsApp pour tous les types de paiement
-    if (orderData && !whatsappSent) {
-      sendWhatsAppMessage();
-      setWhatsappSent(true);
+  const saveCommande = async (orderData, paymentIntentId) => {
+    try {
+      await fetch('/api/save-commande', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          paymentIntentId,
+          orderData
+        })
+      });
+    } catch (error) {
+      console.error('Erreur sauvegarde commande:', error);
     }
-  }, [orderData, whatsappSent]);
+  };
+
+  // useEffect(() => {
+  //   // On envoie le message WhatsApp pour tous les types de paiement
+  //   if (orderData && !whatsappSent) {
+  //     sendWhatsAppMessage();
+  //     setWhatsappSent(true);
+  //   }
+  // }, [orderData, whatsappSent]);
 
   const sendWhatsAppMessage = () => {
     if (!orderData) return;
